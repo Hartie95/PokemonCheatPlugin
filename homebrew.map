@@ -1,0 +1,724 @@
+Archive member included to satisfy reference by file (symbol)
+
+./lib\libc.a(lib_a-memcpy-stub.o)
+                              lib\rt.o (memcpy)
+./lib\libc.a(lib_a-memset.o)  menu.o (memset)
+./lib\libc.a(lib_a-rand.o)    pokeEncounterModifier.o (rand)
+./lib\libc.a(lib_a-strcpy.o)  menu.o (strcpy)
+./lib\libc.a(lib_a-strlen.o)  menu.o (strlen)
+./lib\libc.a(lib_a-impure.o)  ./lib\libc.a(lib_a-rand.o) (_impure_ptr)
+./lib\libgcc.a(_divsi3.o)     pokeEncounterModifier.o (__aeabi_idivmod)
+./lib\libgcc.a(_dvmd_tls.o)   ./lib\libgcc.a(_divsi3.o) (__aeabi_idiv0)
+
+Allocating common symbols
+Common symbol       size              file
+
+gamePluginMenu      0xc7c             menu.o
+sdmcArchive         0x18              gameplg.o
+fsUserHandle        0x4               gameplg.o
+cheatEnabled        0x40              gameplg.o
+threadStack         0x4000            gameplg.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+                0x00100100                . = 0x100100
+                0x00100100                . = ALIGN (0x4)
+
+.text           0x00100100     0x3980
+                0x00100100                __text_start = .
+ bootloader.o(.text*)
+ .text          0x00100100       0xb0 bootloader.o
+                0x00100100                _Reset
+                0x0010017c                _ReturnToUser
+                0x00100190                plgGetIoBase
+                0x00100198                copyRemoteMemory
+ *(.text*)
+ .text          0x001001b0      0x690 gameplg.o
+                0x001001b0                initCheatMenu
+                0x00100280                initPlugins
+                0x001002ac                scanMenu
+                0x001002f0                detectLanguage
+                0x001002f8                updateCheatEnableDisplay
+                0x0010032c                disableCheat
+                0x00100340                onCheatItemChanged
+                0x00100440                handleCheats
+                0x001006e8                isCategory
+                0x00100738                scanCheatMenu
+                0x00100788                gamePluginEntry
+ .text          0x00100840       0xe8 helpers.o
+                0x00100840                getKey
+                0x00100860                waitKeyUp
+                0x00100890                waitKeyCombinationChanged
+                0x001008c0                getEdition
+ .text          0x00100928      0x198 itemModifier.o
+                0x00100928                initItemModifier
+                0x00100990                getItemCountAddress
+                0x001009ac                setItemCountAt
+                0x001009d0                addToItemCountAt
+                0x001009fc                removeFromItemCountAt
+                0x00100a28                getMedicineCountAddress
+                0x00100a44                setMedicineCountAt
+                0x00100a68                addToMedicineCountAt
+                0x00100a94                removeFromMedicineCountAt
+ .text          0x00100ac0      0x148 menu.o
+                0x00100ac0                initMenu
+                0x00100ad8                addMenuEntry
+                0x00100b38                addCheatMenuEntry
+                0x00100b64                addOrCheatMenuEntry
+                0x00100b90                updateMenu
+ .text          0x00100c08       0xa0 otherModifiers.o
+                0x00100c08                initOtherModifiers
+                0x00100c64                setMoney
+                0x00100c78                setRemainingRepel
+                0x00100c8c                setRemainingOPower
+ .text          0x00100ca8      0x750 pokeEncounterModifier.o
+                0x00100ca8                initWildPokeModifier
+                0x00100d0c                RandMinMax
+                0x00100d30                isObtained
+                0x00100dc8                getRandomVariation
+                0x001012a0                GetRandomPokemon
+                0x001012d4                setWildPokemonfromAddress
+ .text          0x001013f8      0x144 lib\AC.o
+                0x001013f8                ACU_cmd1
+                0x00101448                ACU_cmd26
+                0x001014a8                ACU_GetWifiStatus
+                0x001014e0                ACU_WaitInternetConnection
+ .text          0x0010153c       0x30 lib\entry.o
+                0x0010153c                c_entry
+                0x00101568                IRQHandler
+ .text          0x0010156c      0x50c lib\FS.o
+                0x0010156c                FSUSER_Initialize
+                0x001015a0                FSUSER_OpenFile
+                0x00101640                FSUSER_OpenFileDirectly
+                0x00101700                FSUSER_OpenArchive
+                0x00101784                FSUSER_OpenDirectory
+                0x00101810                FSUSER_CloseArchive
+                0x00101860                FSFILE_Close
+                0x00101890                FSFILE_Read
+                0x001018f8                FSFILE_Write
+                0x00101968                FSFILE_GetSize
+                0x001019ac                FSFILE_SetSize
+                0x001019e4                FSDIR_Read
+                0x00101a48                FSDIR_Close
+ .text          0x00101a78       0x28 lib\main.o
+                0x00101a78                threadStart
+ .text.startup  0x00101aa0       0x80 lib\main.o
+                0x00101aa0                main
+ .text          0x00101b20       0x10 lib\misc.o
+                0x00101b20                sleep
+ .text          0x00101b30       0x3c lib\OS.o
+                0x00101b30                OS_ConvertVaddr2Physaddr
+ .text          0x00101b6c       0xd4 lib\pm.o
+                0x00101b6c                dumpKernel
+                0x00101b70                getCurrentProcessId
+                0x00101b94                getCurrentProcessHandle
+                0x00101bfc                protectRemoteMemory
+                0x00101c20                protectMemory
+ .text          0x00101c40      0x54c lib\rt.o
+                0x00101c40                rtInitLock
+                0x00101c4c                rtAcquireLock
+                0x00101c80                rtReleaseLock
+                0x00101c8c                rtAlignToPageSize
+                0x00101c9c                rtGetPageOfAddress
+                0x00101ca8                rtCheckRemoteMemoryRegionSafeForWrite
+                0x00101cf8                rtSafeCopyMemory
+                0x00101d50                rtRecvSocket
+                0x00101db0                rtSendSocket
+                0x00101e0c                rtIntToPortNumber
+                0x00101e28                rtGetFileSize
+                0x00101f14                rtLoadFileToBuffer
+                0x0010205c                rtGenerateJumpCode
+                0x00102074                rtFlushInstructionCache
+                0x0010208c                rtInitHook
+                0x00102104                rtEnableHook
+                0x00102148                rtDisableHook
+ .text          0x0010218c      0x10c lib\sharedfunc.o
+                0x0010218c                initSharedFunc
+ .text          0x00102298      0xef8 lib\SOC.o
+                0x001022d4                socu_cmd1
+                0x00102324                SOC_Shutdown
+                0x00102360                SOC_Initialize
+                0x001023c8                SOC_GetErrno
+                0x001023d8                socket
+                0x00102440                closesocket
+                0x001024a0                shutdown
+                0x00102504                listen
+                0x00102568                accept
+                0x00102664                bind
+                0x00102734                connect
+                0x00102804                socuipc_cmd7
+                0x00102920                socuipc_cmd8
+                0x00102a60                socuipc_cmd9
+                0x00102b70                socuipc_cmda
+                0x00102c84                recvfrom
+                0x00102cb0                sendto
+                0x00102cdc                recv
+                0x00102cf8                send
+                0x00102d14                getsockopt
+                0x00102dc4                setsockopt
+                0x00102e4c                fcntl
+                0x00102f14                sockatmark
+                0x00102f74                gethostid
+                0x00102fb0                getsockname
+                0x001030a0                getpeername
+ .text          0x00103190      0x118 lib\srv.o
+                0x00103190                exitSrv
+                0x001031a8                srv_RegisterClient
+                0x001031e8                initSrv
+                0x0010321c                srv_getServiceHandle
+ .text          0x001032a8       0x40 lib\stub.o
+                0x001032a8                showDbg
+                0x001032b0                nsDbgPrint
+                0x001032b8                plgRegisterMenuEntry
+                0x001032c0                plgGetSharedServiceHandle
+                0x001032c8                plgRequestMemory
+                0x001032d0                plgRegisterCallback
+                0x001032d8                xsprintf
+                0x001032e0                controlVideo
+ *fill*         0x001032e8        0x8 
+ .text          0x001032f0      0x2a0 lib\svc.o
+                0x001032f0                getThreadCommandBuffer
+                0x001032fc                svc_controlMemory
+                0x0010331c                svc_exitProcess
+                0x00103324                svc_createThread
+                0x00103344                svc_exitThread
+                0x0010334c                svc_sleepThread
+                0x00103354                svc_createMutex
+                0x00103368                svc_releaseMutex
+                0x00103370                svc_releaseSemaphore
+                0x00103384                svc_createEvent
+                0x00103398                svc_signalEvent
+                0x001033a0                svc_clearEvent
+                0x001033a8                svc_createMemoryBlock
+                0x001033c0                svc_mapMemoryBlock
+                0x001033c8                svc_unmapMemoryBlock
+                0x001033d0                svc_arbitrateAddress
+                0x001033d8                svc_closeHandle
+                0x001033e0                svc_waitSynchronization1
+                0x001033e8                svc_waitSynchronizationN
+                0x00103408                svc_getSystemTick
+                0x00103410                svc_getSystemInfo
+                0x0010342c                svc_getProcessInfo
+                0x00103448                svc_connectToPort
+                0x0010345c                svc_sendSyncRequest
+                0x00103464                svc_getProcessId
+                0x00103478                svc_getThreadId
+                0x0010348c                svc_setThreadIdealProcessor
+                0x00103494                svc_openThread
+                0x001034a8                svc_flushProcessDataCache
+                0x001034b0                svc_invalidateProcessDataCache
+                0x001034b8                svc_queryMemory
+                0x001034c0                svc_addCodeSegment
+                0x001034c8                svc_openProcess
+                0x001034dc                svc_controlProcessMemory
+                0x001034f4                svc_mapProcessMemory
+                0x001034fc                svc_startInterProcessDma
+                0x0010351c                svc_getDmaState
+                0x00103530                svc_backDoor
+                0x00103538                svc_getProcessList
+                0x0010354c                svc_getThreadList
+                0x00103560                svc_getThreadContext
+                0x00103568                svc_debugActiveProcess
+                0x0010357c                svc_readProcessMemory
+                0x00103584                svc_writeProcessMemory
+ .text          0x00103590       0xf0 ./lib\libc.a(lib_a-memcpy-stub.o)
+                0x00103590                memcpy
+ .text          0x00103680       0xf4 ./lib\libc.a(lib_a-memset.o)
+                0x00103680                memset
+ .text          0x00103774       0x70 ./lib\libc.a(lib_a-rand.o)
+                0x00103774                srand
+                0x00103790                rand
+ .text          0x001037e4       0xf0 ./lib\libc.a(lib_a-strcpy.o)
+                0x001037e4                strcpy
+ .text          0x001038d4       0x60 ./lib\libc.a(lib_a-strlen.o)
+                0x001038d4                strlen
+ .text          0x00103934        0x0 ./lib\libc.a(lib_a-impure.o)
+ .text          0x00103934      0x148 ./lib\libgcc.a(_divsi3.o)
+                0x00103934                __divsi3
+                0x00103934                __aeabi_idiv
+                0x00103a5c                __aeabi_idivmod
+ .text          0x00103a7c        0x4 ./lib\libgcc.a(_dvmd_tls.o)
+                0x00103a7c                __aeabi_idiv0
+                0x00103a7c                __aeabi_ldiv0
+
+.glue_7         0x00103a80        0x0
+ .glue_7        0x00103a80        0x0 linker stubs
+
+.glue_7t        0x00103a80        0x0
+ .glue_7t       0x00103a80        0x0 linker stubs
+
+.vfp11_veneer   0x00103a80        0x0
+ .vfp11_veneer  0x00103a80        0x0 linker stubs
+
+.v4_bx          0x00103a80        0x0
+ .v4_bx         0x00103a80        0x0 linker stubs
+
+.plt            0x00103a80        0x0
+ .plt           0x00103a80        0x0 bootloader.o
+
+.iplt           0x00103a80        0x0
+ .iplt          0x00103a80        0x0 bootloader.o
+                0x00103a80                . = ALIGN (0x4)
+
+.data           0x00103a80      0x438
+ *(.data)
+ .data          0x00103a80        0x0 bootloader.o
+ .data          0x00103a80        0x0 gameplg.o
+ .data          0x00103a80        0x4 helpers.o
+                0x00103a80                IoBasePad
+ .data          0x00103a84        0x0 itemModifier.o
+ .data          0x00103a84        0x0 menu.o
+ .data          0x00103a84        0x0 otherModifiers.o
+ .data          0x00103a84        0x0 pokeEncounterModifier.o
+ .data          0x00103a84        0x0 lib\AC.o
+ .data          0x00103a84        0x0 lib\entry.o
+ .data          0x00103a84        0x0 lib\FS.o
+ .data          0x00103a84        0x4 lib\main.o
+                0x00103a84                socuRet
+ .data          0x00103a88        0x0 lib\misc.o
+ .data          0x00103a88        0x0 lib\OS.o
+ .data          0x00103a88        0x0 lib\pm.o
+ .data          0x00103a88        0x0 lib\rt.o
+ .data          0x00103a88        0x0 lib\sharedfunc.o
+ .data          0x00103a88        0x0 lib\SOC.o
+ .data          0x00103a88        0x0 lib\srv.o
+ .data          0x00103a88        0x0 lib\stub.o
+ .data          0x00103a88        0x0 lib\svc.o
+ .data          0x00103a88        0x0 ./lib\libc.a(lib_a-memcpy-stub.o)
+ .data          0x00103a88        0x0 ./lib\libc.a(lib_a-memset.o)
+ .data          0x00103a88        0x0 ./lib\libc.a(lib_a-rand.o)
+ .data          0x00103a88        0x0 ./lib\libc.a(lib_a-strcpy.o)
+ .data          0x00103a88        0x0 ./lib\libc.a(lib_a-strlen.o)
+ .data          0x00103a88      0x430 ./lib\libc.a(lib_a-impure.o)
+                0x00103a88                _impure_ptr
+ .data          0x00103eb8        0x0 ./lib\libgcc.a(_divsi3.o)
+ .data          0x00103eb8        0x0 ./lib\libgcc.a(_dvmd_tls.o)
+
+.dynamic        0x00103eb8       0x80
+ .dynamic       0x00103eb8       0x80 bootloader.o
+                0x00103eb8                _DYNAMIC
+
+.got            0x00103f38        0x0
+ .got           0x00103f38        0x0 bootloader.o
+
+.got.plt        0x00103f38        0xc
+ .got.plt       0x00103f38        0xc bootloader.o
+                0x00103f38                _GLOBAL_OFFSET_TABLE_
+
+.igot.plt       0x00103f44        0x0
+ .igot.plt      0x00103f44        0x0 bootloader.o
+                0x00103f44                . = ALIGN (0x4)
+                0x00103f44                . = ALIGN (0x4)
+
+.rel.dyn        0x00103f44      0x3d0
+ *(.__rel_dyn_start)
+ .__rel_dyn_start
+                0x00103f44        0x0 bootloader.o
+ *(.rel*)
+ .rel.got       0x00103f44        0x0 bootloader.o
+ .rel.plt       0x00103f44        0x0 bootloader.o
+ .rel.iplt      0x00103f44        0x0 bootloader.o
+ .rel.text      0x00103f44      0x380 bootloader.o
+ .rel.text.startup
+                0x001042c4       0x20 bootloader.o
+ .rel.data      0x001042e4       0x28 bootloader.o
+ .rel.rodata    0x0010430c        0x8 bootloader.o
+ *(.rel.*)
+ *(.__rel_dyn_end)
+ .__rel_dyn_end
+                0x00104314        0x0 bootloader.o
+                0x00104314                __code_end = .
+
+.interp         0x00104314       0x11
+ .interp        0x00104314       0x11 bootloader.o
+
+.gnu.version_d  0x00104328        0x0
+ .gnu.version_d
+                0x00104328        0x0 bootloader.o
+
+.gnu.version    0x00104326        0x0
+ .gnu.version   0x00104326        0x0 bootloader.o
+
+.gnu.version_r  0x00104328        0x0
+ .gnu.version_r
+                0x00104328        0x0 bootloader.o
+
+.dynsym         0x00104328       0x60
+ .dynsym        0x00104328       0x60 bootloader.o
+
+.dynstr         0x00104388       0x21
+ .dynstr        0x00104388       0x21 bootloader.o
+
+.hash           0x001043ac       0x2c
+ .hash          0x001043ac       0x2c bootloader.o
+
+.rodata         0x001043d8       0x60
+ .rodata        0x001043d8        0xc gameplg.o
+ .rodata        0x001043e4       0x4d lib\SOC.o
+ *fill*         0x00104431        0x3 
+ .rodata        0x00104434        0x4 ./lib\libc.a(lib_a-impure.o)
+                0x00104434                _global_impure_ptr
+
+.rodata.str1.1  0x00104438      0x210
+ .rodata.str1.1
+                0x00104438      0x140 gameplg.o
+ .rodata.str1.1
+                0x00104578        0xe menu.o
+ .rodata.str1.1
+                0x00104586        0x5 lib\AC.o
+ .rodata.str1.1
+                0x0010458b       0x20 lib\main.o
+ .rodata.str1.1
+                0x001045ab       0x1e lib\pm.o
+ .rodata.str1.1
+                0x001045c9       0x74 lib\rt.o
+ .rodata.str1.1
+                0x0010463d        0x6 lib\SOC.o
+ .rodata.str1.1
+                0x00104643        0x5 lib\srv.o
+
+.rodata.str1.4  0x00104648        0x4
+ .rodata.str1.4
+                0x00104648        0x4 ./lib\libc.a(lib_a-impure.o)
+                0x0010464c                . = ALIGN (0x4)
+
+.bss            0x0010464c     0x4d24
+ *(.__bss_start)
+ .__bss_start   0x0010464c        0x0 bootloader.o
+                0x0010464c                __c_bss_start
+ *(.bss COMMON)
+ .bss           0x0010464c        0x0 bootloader.o
+ .bss           0x0010464c        0x8 gameplg.o
+                0x0010464c                edition
+                0x00104650                isNewNtr
+ COMMON         0x00104654     0x405c gameplg.o
+                0x00104654                sdmcArchive
+                0x0010466c                fsUserHandle
+                0x00104670                cheatEnabled
+                0x001046b0                threadStack
+ .bss           0x001086b0        0x0 helpers.o
+ .bss           0x001086b0       0x10 itemModifier.o
+                0x001086b0                ItemPointerOffset
+                0x001086b4                ItemDataLength
+                0x001086b8                MedicinePointerOffset
+                0x001086bc                MedicineDataLength
+ .bss           0x001086c0        0x0 menu.o
+ COMMON         0x001086c0      0xc7c menu.o
+                0x001086c0                gamePluginMenu
+ .bss           0x0010933c        0xc otherModifiers.o
+                0x0010933c                MoneyPointerOffset
+                0x00109340                RepelPointerOffset
+                0x00109344                OPowerPointerOffset
+ .bss           0x00109348       0x14 pokeEncounterModifier.o
+                0x00109348                curEdition
+                0x0010934c                PointerOffset
+                0x00109350                EncDataLength
+                0x00109354                ByteJump
+                0x00109358                DexOffset
+ .bss           0x0010935c        0x0 lib\AC.o
+ .bss           0x0010935c        0x0 lib\entry.o
+ .bss           0x0010935c        0x0 lib\FS.o
+ .bss           0x0010935c        0x0 lib\main.o
+ .bss           0x0010935c        0x0 lib\misc.o
+ .bss           0x0010935c        0x0 lib\OS.o
+ .bss           0x0010935c        0x8 lib\pm.o
+                0x0010935c                currentPid
+                0x00109360                hCurrentProcess
+ .bss           0x00109364        0x0 lib\rt.o
+ .bss           0x00109364        0x0 lib\sharedfunc.o
+ .bss           0x00109364        0x8 lib\SOC.o
+                0x00109364                SOCU_handle
+ .bss           0x0010936c        0x4 lib\srv.o
+                0x0010936c                srvHandle
+ .bss           0x00109370        0x0 lib\stub.o
+ .bss           0x00109370        0x0 lib\svc.o
+ .bss           0x00109370        0x0 ./lib\libc.a(lib_a-memcpy-stub.o)
+ .bss           0x00109370        0x0 ./lib\libc.a(lib_a-memset.o)
+ .bss           0x00109370        0x0 ./lib\libc.a(lib_a-rand.o)
+ .bss           0x00109370        0x0 ./lib\libc.a(lib_a-strcpy.o)
+ .bss           0x00109370        0x0 ./lib\libc.a(lib_a-strlen.o)
+ .bss           0x00109370        0x0 ./lib\libc.a(lib_a-impure.o)
+ .bss           0x00109370        0x0 ./lib\libgcc.a(_divsi3.o)
+ .bss           0x00109370        0x0 ./lib\libgcc.a(_dvmd_tls.o)
+ *(.__bss_end)
+ .__bss_end     0x00109370        0x0 bootloader.o
+                0x00109370                __c_bss_end
+                0x00109370                __end__ = .
+LOAD bootloader.o
+LOAD gameplg.o
+LOAD helpers.o
+LOAD itemModifier.o
+LOAD menu.o
+LOAD otherModifiers.o
+LOAD pokeEncounterModifier.o
+LOAD lib\AC.o
+LOAD lib\entry.o
+LOAD lib\FS.o
+LOAD lib\main.o
+LOAD lib\misc.o
+LOAD lib\OS.o
+LOAD lib\pm.o
+LOAD lib\rt.o
+LOAD lib\sharedfunc.o
+LOAD lib\SOC.o
+LOAD lib\srv.o
+LOAD lib\stub.o
+LOAD lib\svc.o
+LOAD ./lib\libc.a
+LOAD ./lib\libgcc.a
+OUTPUT(a.out elf32-littlearm)
+
+.dynbss         0x00109370        0x0
+ .dynbss        0x00109370        0x0 bootloader.o
+
+.ARM.attributes
+                0x00000000       0x27
+ .ARM.attributes
+                0x00000000       0x19 bootloader.o
+ .ARM.attributes
+                0x00000019       0x2b gameplg.o
+ .ARM.attributes
+                0x00000044       0x2b helpers.o
+ .ARM.attributes
+                0x0000006f       0x2b itemModifier.o
+ .ARM.attributes
+                0x0000009a       0x2b menu.o
+ .ARM.attributes
+                0x000000c5       0x2b otherModifiers.o
+ .ARM.attributes
+                0x000000f0       0x2b pokeEncounterModifier.o
+ .ARM.attributes
+                0x0000011b       0x2b lib\AC.o
+ .ARM.attributes
+                0x00000146       0x2b lib\entry.o
+ .ARM.attributes
+                0x00000171       0x2b lib\FS.o
+ .ARM.attributes
+                0x0000019c       0x2b lib\main.o
+ .ARM.attributes
+                0x000001c7       0x19 lib\misc.o
+ .ARM.attributes
+                0x000001e0       0x2b lib\OS.o
+ .ARM.attributes
+                0x0000020b       0x2b lib\pm.o
+ .ARM.attributes
+                0x00000236       0x2b lib\rt.o
+ .ARM.attributes
+                0x00000261       0x2b lib\sharedfunc.o
+ .ARM.attributes
+                0x0000028c       0x2b lib\SOC.o
+ .ARM.attributes
+                0x000002b7       0x2b lib\srv.o
+ .ARM.attributes
+                0x000002e2       0x19 lib\stub.o
+ .ARM.attributes
+                0x000002fb       0x19 lib\svc.o
+ .ARM.attributes
+                0x00000314       0x30 ./lib\libc.a(lib_a-memcpy-stub.o)
+ .ARM.attributes
+                0x00000344       0x30 ./lib\libc.a(lib_a-memset.o)
+ .ARM.attributes
+                0x00000374       0x30 ./lib\libc.a(lib_a-rand.o)
+ .ARM.attributes
+                0x000003a4       0x30 ./lib\libc.a(lib_a-strcpy.o)
+ .ARM.attributes
+                0x000003d4       0x30 ./lib\libc.a(lib_a-strlen.o)
+ .ARM.attributes
+                0x00000404       0x30 ./lib\libc.a(lib_a-impure.o)
+ .ARM.attributes
+                0x00000434       0x18 ./lib\libgcc.a(_divsi3.o)
+ .ARM.attributes
+                0x0000044c       0x18 ./lib\libgcc.a(_dvmd_tls.o)
+
+.comment        0x00000000       0x44
+ .comment       0x00000000       0x22 gameplg.o
+                                 0x23 (size before relaxing)
+ .comment       0x00000022       0x23 helpers.o
+ .comment       0x00000022       0x23 itemModifier.o
+ .comment       0x00000022       0x23 menu.o
+ .comment       0x00000022       0x23 otherModifiers.o
+ .comment       0x00000022       0x23 pokeEncounterModifier.o
+ .comment       0x00000022       0x22 lib\AC.o
+                                 0x23 (size before relaxing)
+ .comment       0x00000044       0x23 lib\entry.o
+ .comment       0x00000044       0x23 lib\FS.o
+ .comment       0x00000044       0x23 lib\main.o
+ .comment       0x00000044       0x23 lib\OS.o
+ .comment       0x00000044       0x23 lib\pm.o
+ .comment       0x00000044       0x23 lib\rt.o
+ .comment       0x00000044       0x23 lib\sharedfunc.o
+ .comment       0x00000044       0x23 lib\SOC.o
+ .comment       0x00000044       0x23 lib\srv.o
+ .comment       0x00000044       0x23 ./lib\libc.a(lib_a-memcpy-stub.o)
+ .comment       0x00000044       0x23 ./lib\libc.a(lib_a-memset.o)
+ .comment       0x00000044       0x23 ./lib\libc.a(lib_a-rand.o)
+ .comment       0x00000044       0x23 ./lib\libc.a(lib_a-strcpy.o)
+ .comment       0x00000044       0x23 ./lib\libc.a(lib_a-strlen.o)
+ .comment       0x00000044       0x23 ./lib\libc.a(lib_a-impure.o)
+
+.debug_info     0x00000000     0x56c8
+ .debug_info    0x00000000      0xb48 gameplg.o
+ .debug_info    0x00000b48      0x185 helpers.o
+ .debug_info    0x00000ccd      0x2b1 itemModifier.o
+ .debug_info    0x00000f7e      0x4ca menu.o
+ .debug_info    0x00001448      0x188 otherModifiers.o
+ .debug_info    0x000015d0      0x575 pokeEncounterModifier.o
+ .debug_info    0x00001b45      0x368 lib\AC.o
+ .debug_info    0x00001ead      0x11f lib\entry.o
+ .debug_info    0x00001fcc      0x8a9 lib\FS.o
+ .debug_info    0x00002875      0x3ed lib\main.o
+ .debug_info    0x00002c62       0xc0 lib\OS.o
+ .debug_info    0x00002d22      0x335 lib\pm.o
+ .debug_info    0x00003057      0xc82 lib\rt.o
+ .debug_info    0x00003cd9      0x335 lib\sharedfunc.o
+ .debug_info    0x0000400e     0x13dc lib\SOC.o
+ .debug_info    0x000053ea      0x2de lib\srv.o
+
+.debug_abbrev   0x00000000     0x1764
+ .debug_abbrev  0x00000000      0x275 gameplg.o
+ .debug_abbrev  0x00000275      0x104 helpers.o
+ .debug_abbrev  0x00000379       0xa3 itemModifier.o
+ .debug_abbrev  0x0000041c      0x1dd menu.o
+ .debug_abbrev  0x000005f9       0x87 otherModifiers.o
+ .debug_abbrev  0x00000680      0x204 pokeEncounterModifier.o
+ .debug_abbrev  0x00000884      0x13f lib\AC.o
+ .debug_abbrev  0x000009c3       0xcc lib\entry.o
+ .debug_abbrev  0x00000a8f      0x144 lib\FS.o
+ .debug_abbrev  0x00000bd3      0x1ad lib\main.o
+ .debug_abbrev  0x00000d80       0x6d lib\OS.o
+ .debug_abbrev  0x00000ded      0x15f lib\pm.o
+ .debug_abbrev  0x00000f4c      0x2aa lib\rt.o
+ .debug_abbrev  0x000011f6       0xfb lib\sharedfunc.o
+ .debug_abbrev  0x000012f1      0x304 lib\SOC.o
+ .debug_abbrev  0x000015f5      0x16f lib\srv.o
+
+.debug_loc      0x00000000     0x357e
+ .debug_loc     0x00000000      0x20c gameplg.o
+ .debug_loc     0x0000020c       0x55 helpers.o
+ .debug_loc     0x00000261      0x29e itemModifier.o
+ .debug_loc     0x000004ff      0x111 menu.o
+ .debug_loc     0x00000610       0x5b otherModifiers.o
+ .debug_loc     0x0000066b      0x663 pokeEncounterModifier.o
+ .debug_loc     0x00000cce      0x1cc lib\AC.o
+ .debug_loc     0x00000e9a       0x34 lib\entry.o
+ .debug_loc     0x00000ece      0x7db lib\FS.o
+ .debug_loc     0x000016a9       0x76 lib\main.o
+ .debug_loc     0x0000171f       0x5c lib\OS.o
+ .debug_loc     0x0000177b       0xfa lib\pm.o
+ .debug_loc     0x00001875      0x6b8 lib\rt.o
+ .debug_loc     0x00001f2d     0x152b lib\SOC.o
+ .debug_loc     0x00003458      0x126 lib\srv.o
+
+.debug_aranges  0x00000000      0x208
+ .debug_aranges
+                0x00000000       0x20 gameplg.o
+ .debug_aranges
+                0x00000020       0x20 helpers.o
+ .debug_aranges
+                0x00000040       0x20 itemModifier.o
+ .debug_aranges
+                0x00000060       0x20 menu.o
+ .debug_aranges
+                0x00000080       0x20 otherModifiers.o
+ .debug_aranges
+                0x000000a0       0x20 pokeEncounterModifier.o
+ .debug_aranges
+                0x000000c0       0x20 lib\AC.o
+ .debug_aranges
+                0x000000e0       0x20 lib\entry.o
+ .debug_aranges
+                0x00000100       0x20 lib\FS.o
+ .debug_aranges
+                0x00000120       0x28 lib\main.o
+ .debug_aranges
+                0x00000148       0x20 lib\OS.o
+ .debug_aranges
+                0x00000168       0x20 lib\pm.o
+ .debug_aranges
+                0x00000188       0x20 lib\rt.o
+ .debug_aranges
+                0x000001a8       0x20 lib\sharedfunc.o
+ .debug_aranges
+                0x000001c8       0x20 lib\SOC.o
+ .debug_aranges
+                0x000001e8       0x20 lib\srv.o
+
+.debug_line     0x00000000     0x192e
+ .debug_line    0x00000000      0x257 gameplg.o
+ .debug_line    0x00000257       0xec helpers.o
+ .debug_line    0x00000343       0xe9 itemModifier.o
+ .debug_line    0x0000042c      0x136 menu.o
+ .debug_line    0x00000562       0xd7 otherModifiers.o
+ .debug_line    0x00000639      0x1cf pokeEncounterModifier.o
+ .debug_line    0x00000808      0x12e lib\AC.o
+ .debug_line    0x00000936       0xe1 lib\entry.o
+ .debug_line    0x00000a17      0x1d0 lib\FS.o
+ .debug_line    0x00000be7      0x155 lib\main.o
+ .debug_line    0x00000d3c       0xed lib\OS.o
+ .debug_line    0x00000e29      0x120 lib\pm.o
+ .debug_line    0x00000f49      0x27f lib\rt.o
+ .debug_line    0x000011c8      0x102 lib\sharedfunc.o
+ .debug_line    0x000012ca      0x4ed lib\SOC.o
+ .debug_line    0x000017b7      0x177 lib\srv.o
+
+.debug_str      0x00000000     0x1167
+ .debug_str     0x00000000      0x543 gameplg.o
+                                0x5dc (size before relaxing)
+ .debug_str     0x00000543       0x2d helpers.o
+                                0x1a0 (size before relaxing)
+ .debug_str     0x00000570       0xb0 itemModifier.o
+                                0x26d (size before relaxing)
+ .debug_str     0x00000620      0x104 menu.o
+                                0x311 (size before relaxing)
+ .debug_str     0x00000724       0x52 otherModifiers.o
+                                0x1e2 (size before relaxing)
+ .debug_str     0x00000776      0x110 pokeEncounterModifier.o
+                                0x29d (size before relaxing)
+ .debug_str     0x00000886      0x112 lib\AC.o
+                                0x1e9 (size before relaxing)
+ .debug_str     0x00000998       0x3c lib\entry.o
+                                0x14a (size before relaxing)
+ .debug_str     0x000009d4      0x163 lib\FS.o
+                                0x367 (size before relaxing)
+ .debug_str     0x00000b37       0xb8 lib\main.o
+                                0x2a1 (size before relaxing)
+ .debug_str     0x00000bef       0x33 lib\OS.o
+                                0x123 (size before relaxing)
+ .debug_str     0x00000c22       0xb0 lib\pm.o
+                                0x229 (size before relaxing)
+ .debug_str     0x00000cd2      0x1f4 lib\rt.o
+                                0x4f0 (size before relaxing)
+ .debug_str     0x00000ec6       0x1e lib\sharedfunc.o
+                                0x22f (size before relaxing)
+ .debug_str     0x00000ee4      0x240 lib\SOC.o
+                                0x420 (size before relaxing)
+ .debug_str     0x00001124       0x43 lib\srv.o
+                                0x1e1 (size before relaxing)
+
+.debug_frame    0x00000000      0xce0
+ .debug_frame   0x00000000      0x13c gameplg.o
+ .debug_frame   0x0000013c       0x60 helpers.o
+ .debug_frame   0x0000019c       0xa0 itemModifier.o
+ .debug_frame   0x0000023c       0x94 menu.o
+ .debug_frame   0x000002d0       0x50 otherModifiers.o
+ .debug_frame   0x00000320       0xa4 pokeEncounterModifier.o
+ .debug_frame   0x000003c4       0x8c lib\AC.o
+ .debug_frame   0x00000450       0x30 lib\entry.o
+ .debug_frame   0x00000480      0x1ac lib\FS.o
+ .debug_frame   0x0000062c       0x48 lib\main.o
+ .debug_frame   0x00000674       0x20 lib\OS.o
+ .debug_frame   0x00000694       0x90 lib\pm.o
+ .debug_frame   0x00000724      0x1a8 lib\rt.o
+ .debug_frame   0x000008cc       0x2c lib\sharedfunc.o
+ .debug_frame   0x000008f8      0x370 lib\SOC.o
+ .debug_frame   0x00000c68       0x78 lib\srv.o
+
+.debug_ranges   0x00000000       0x80
+ .debug_ranges  0x00000000       0x18 pokeEncounterModifier.o
+ .debug_ranges  0x00000018       0x18 lib\main.o
+ .debug_ranges  0x00000030       0x50 lib\rt.o
