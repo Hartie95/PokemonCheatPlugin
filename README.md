@@ -7,11 +7,11 @@ This plugin for NTR CFW adds some features to Pokemon X/Y/OR/AS.
 
 * Wild encounter modifier
  * Species
-  * Random/by item count
+   * Random/by item count
  * Variation
-  * Random/by item count
+   * Random/by item count
 * ItemModifier
- * Item count
+  * Item count
 
 ### Planned features
 
@@ -22,11 +22,11 @@ This plugin for NTR CFW adds some features to Pokemon X/Y/OR/AS.
 
 * Wild encounter modifier(Item)
  * Species
-  * Press L+R+A to set the first item to 721
-  * Modifie the item count using:L+R+UP(+1)/L+R+DOWN(-1)L+R+RIGTH(+10)/L+R+LEFT(-10) 
+   * Press L+R+A to set the first item to 721
+   * Modifie the item count using:L+R+UP(+1)/L+R+DOWN(-1)L+R+RIGTH(+10)/L+R+LEFT(-10) 
  * Variation
-  * Press L+R+A to set the second item to 27
-  * Modifie the item count using:L+R+B+UP(+1)/L+R+B+DOWN(-1)L+R+B+RIGTH(+10)/L+R+B+LEFT(-10) 
+   * Press L+R+A to set the second item to 27
+   * Modifie the item count using:L+R+B+UP(+1)/L+R+B+DOWN(-1)L+R+B+RIGTH(+10)/L+R+B+LEFT(-10) 
 
 ### Placement
 * X:  /plugin/0004000000055D00/
