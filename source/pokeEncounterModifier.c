@@ -253,7 +253,6 @@ int GetRandomPokemon(bool checkObtained)
 		result = RandMinMax(1, 721);
 	}
 	while (isObtained(result)&&checkObtained);
-	//result= getRandomVariation(result);
 	return result;
 }
 
@@ -274,31 +273,40 @@ void setWildPokemonfromAddress(	u32 pokemonAddress,
 			if (Read32(ZOOffset + 0x10) != Read32(ZOOffset + 0x14))
 			{
 				unsigned int EncOffset = ZOOffset + Read32(ZOOffset + 0x10) + ByteJump;
-
 				int i;
 				int pokemon=1;
+				u32 currentEncOffset;
 				for (i = 0; i < EncDataLength; i += 4)
 				{
 					if (Read8(EncOffset + i + 2) != 0x01)
 					{
+						currentEncOffset=EncOffset+i;
 						//setPokemon
 						if(pokemonAddress>1)
 							pokemon=Read16(pokemonAddress);
 						else if(pokemonAddress==1)
 							pokemon=GetRandomPokemon(enableObtainedCheck);
 						else
-							pokemon=Read16(EncOffset+i);
+							pokemon=Read16(currentEncOffset);
 						//setPokemonVariation
 						if(pokemonVariation>1)
 							pokemon+=0x800 *(Read16(pokemonVariation)-1);
 						else if(pokemonVariation==1)
 							pokemon=getRandomVariation(pokemon);
 						
-						/*TODO add Level support*/
-						if(pokemonLevel!=0)
-							true;
+						//setPokemonLevel
+						if(pokemonLevel>1)
+						{
+							u8 level=Read8(pokemonLevel);
+							if(level<2)
+								level=2;
+							Write8(currentEncOffset+2, level);
+						}
+						else if(pokemonLevel==1)
+							Write8(currentEncOffset+2, RandMinMax(2,100));
+						//Write8(EncOffset + i+3, 1); //maybefiller?
 
-						Write16(EncOffset + i, pokemon);
+						Write16(currentEncOffset, pokemon);
 					}
 				}
 

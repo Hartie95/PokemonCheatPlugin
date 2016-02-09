@@ -5,6 +5,8 @@
 #include "otherModifiers.h"
 
 #define BUTTONCOMBINATION_ENCOUNTER BUTTON_L|BUTTON_R
+#define BUTTONCOMBINATION_ENCOUNTER_VARIATION BUTTONCOMBINATION_ENCOUNTER|BUTTON_B
+#define BUTTONCOMBINATION_ENCOUNTER_LEVEL BUTTONCOMBINATION_ENCOUNTER|BUTTON_X
 #define BUTTONCOMBINATION_ADD_1 BUTTON_DU
 #define BUTTONCOMBINATION_ADD_10 BUTTON_DR
 #define BUTTONCOMBINATION_REM_1 BUTTON_DD
@@ -24,16 +26,19 @@ int edition = 0;
 #define DEFINE_VARIATION 3
 #define ENTRY_VARIATION_RANDOMIZE 4
 #define ENTRY_VARIATION_ITEM 5
-#define ENTRY_DEXNAV 6
-#define DEFINE_ITEM_COUNT 7
-#define ENTRY_ITEM_COUNT_1 8
-#define ENTRY_ITEM_COUNT_2 9
-#define ENTRY_ITEM_COUNT_3 10
-#define DEFINE_BETA_CHEATS 11
-#define ENTRY_MEDICINE_COUNT_1 12
-#define ENTRY_MAX_MONEY 13
-#define ENTRY_MAX_REPEL 14
-#define ENTRY_MAX_OPOWER 15
+#define DEFINE_LEVEL 6
+#define ENTRY_LEVEL_RANDOMIZE 7
+#define ENTRY_LEVEL_ITEM 8
+#define ENTRY_DEXNAV 9
+#define DEFINE_ITEM_COUNT 10
+#define ENTRY_ITEM_COUNT_1 11
+#define ENTRY_ITEM_COUNT_2 12
+#define ENTRY_ITEM_COUNT_3 13
+#define DEFINE_BETA_CHEATS 14
+#define ENTRY_MEDICINE_COUNT_1 15
+#define ENTRY_MAX_MONEY 16
+#define ENTRY_MAX_REPEL 17
+#define ENTRY_MAX_OPOWER 18
 
 // init 
 void initCheatMenu() {
@@ -44,6 +49,9 @@ void initCheatMenu() {
 	addMenuEntry("Wild Encounter variation modifier");
 	addOrCheatMenuEntry(" Random");
 	addOrCheatMenuEntry(" Second item count");
+	addMenuEntry("Wild Encounter level modifier");
+	addOrCheatMenuEntry(" Random");
+	addOrCheatMenuEntry(" Third item count");
 	addCheatMenuEntry("Update Pokeradar(ORAS only)");
 	addMenuEntry("Item count modifier");
 	addCheatMenuEntry(" Firts item  999x");
@@ -133,6 +141,23 @@ void onCheatItemChanged(int id, int enable) {
 		disableCheat(ENTRY_VARIATION_RANDOMIZE);
 	}
 
+	//WildLevelModifier
+	if(id==ENTRY_LEVEL_RANDOMIZE&&enable==true)
+	{
+		disableCheat(ENTRY_LEVEL_ITEM);
+		disableCheat(ENTRY_ITEM_COUNT_3);
+	}
+	if(id==ENTRY_LEVEL_ITEM&&enable==true)
+	{	
+		disableCheat(ENTRY_LEVEL_RANDOMIZE);
+		disableCheat(ENTRY_ITEM_COUNT_3);
+	}
+	else if(id==ENTRY_ITEM_COUNT_3&&enable==true)
+	{	
+		disableCheat(ENTRY_LEVEL_ITEM);
+		disableCheat(ENTRY_LEVEL_RANDOMIZE);
+	}
+
 	if(id==ENTRY_DEXNAV)
 	{
 		if(edition==PKXY)
@@ -149,6 +174,7 @@ void handleCheats() {
 	{
 		u32 pokemonAddress=0;
 		u32 variationAddress=0;
+		u32 levelAddress=0;
 		bool onlyUnseenPoke=false;
 		bool updateDexNav=false;
 
@@ -164,6 +190,12 @@ void handleCheats() {
 			variationAddress=1;
 		else if(cheatEnabled[ENTRY_VARIATION_ITEM])
 			variationAddress=getItemCountAddress(2);
+
+
+		if(cheatEnabled[ENTRY_LEVEL_RANDOMIZE])
+			levelAddress=1;
+		else if(cheatEnabled[ENTRY_LEVEL_ITEM])
+			levelAddress=getItemCountAddress(3);
 
 		if(cheatEnabled[ENTRY_DEXNAV])
 			updateDexNav=true;
@@ -194,32 +226,59 @@ void handleCheats() {
 					break;
 			}
 		}
+
 		if(cheatEnabled[ENTRY_VARIATION_ITEM])
 		{
 			switch(key)
 			{
-				case (BUTTONCOMBINATION_ENCOUNTER | BUTTON_B | BUTTONCOMBINATION_ADD_1):
+				case (BUTTONCOMBINATION_ENCOUNTER_VARIATION | BUTTONCOMBINATION_ADD_1):
 					addToItemCountAt(2,1);
 					waitKeyCombinationChanged(BUTTONCOMBINATION_ENCOUNTER | BUTTON_B | BUTTONCOMBINATION_ADD_1);
 					break;
-				case (BUTTONCOMBINATION_ENCOUNTER | BUTTON_B | BUTTONCOMBINATION_REM_1):
+				case (BUTTONCOMBINATION_ENCOUNTER_VARIATION | BUTTONCOMBINATION_REM_1):
 					removeFromItemCountAt(2,1);
-					waitKeyCombinationChanged(BUTTONCOMBINATION_ENCOUNTER | BUTTON_B | BUTTONCOMBINATION_REM_1);
+					waitKeyCombinationChanged(BUTTONCOMBINATION_ENCOUNTER | BUTTONCOMBINATION_REM_1);
 					break;
-				case (BUTTONCOMBINATION_ENCOUNTER | BUTTON_B | BUTTONCOMBINATION_ADD_10):
+				case (BUTTONCOMBINATION_ENCOUNTER_VARIATION | BUTTONCOMBINATION_ADD_10):
 					addToItemCountAt(2,10);
-					waitKeyCombinationChanged(BUTTONCOMBINATION_ENCOUNTER | BUTTON_B | BUTTONCOMBINATION_ADD_10);
+					waitKeyCombinationChanged(BUTTONCOMBINATION_ENCOUNTER | BUTTONCOMBINATION_ADD_10);
 					break;
-				case (BUTTONCOMBINATION_ENCOUNTER | BUTTON_B | BUTTONCOMBINATION_REM_10):
+				case (BUTTONCOMBINATION_ENCOUNTER_VARIATION | BUTTONCOMBINATION_REM_10):
 					removeFromItemCountAt(2,10);
-					waitKeyCombinationChanged(BUTTONCOMBINATION_ENCOUNTER | BUTTON_B | BUTTONCOMBINATION_REM_10);
+					waitKeyCombinationChanged(BUTTONCOMBINATION_ENCOUNTER | BUTTONCOMBINATION_REM_10);
 					break;
 				case (BUTTONCOMBINATION_ENCOUNTER | BUTTON_A):
 					setItemCountAt(2,27);
 					break;
 			}
 		}
-		setWildPokemonfromAddress(pokemonAddress,variationAddress, 0,onlyUnseenPoke,updateDexNav);
+
+		if(cheatEnabled[ENTRY_LEVEL_ITEM])
+		{
+			switch(key)
+			{
+				case (BUTTONCOMBINATION_ENCOUNTER_LEVEL | BUTTONCOMBINATION_ADD_1):
+					addToItemCountAt(3,1);
+					waitKeyCombinationChanged(BUTTONCOMBINATION_ENCOUNTER | BUTTON_B | BUTTONCOMBINATION_ADD_1);
+					break;
+				case (BUTTONCOMBINATION_ENCOUNTER_LEVEL | BUTTONCOMBINATION_REM_1):
+					removeFromItemCountAt(3,1);
+					waitKeyCombinationChanged(BUTTONCOMBINATION_ENCOUNTER | BUTTONCOMBINATION_REM_1);
+					break;
+				case (BUTTONCOMBINATION_ENCOUNTER_LEVEL | BUTTONCOMBINATION_ADD_10):
+					addToItemCountAt(3,10);
+					waitKeyCombinationChanged(BUTTONCOMBINATION_ENCOUNTER | BUTTONCOMBINATION_ADD_10);
+					break;
+				case (BUTTONCOMBINATION_ENCOUNTER_LEVEL | BUTTONCOMBINATION_REM_10):
+					removeFromItemCountAt(3,10);
+					waitKeyCombinationChanged(BUTTONCOMBINATION_ENCOUNTER | BUTTONCOMBINATION_REM_10);
+					break;
+				case (BUTTONCOMBINATION_ENCOUNTER | BUTTON_A):
+					setItemCountAt(3,100);
+					break;
+			}
+		}
+		setWildPokemonfromAddress(pokemonAddress,variationAddress, levelAddress,onlyUnseenPoke,updateDexNav);
 	}
 
 	if(cheatEnabled[ENTRY_ITEM_COUNT_1]) {
@@ -248,9 +307,9 @@ void handleCheats() {
 
 bool isCategory(int id)
 {
-	int categorys[3]={DEFINE_VARIATION,DEFINE_ENCOUNTER,DEFINE_ITEM_COUNT};
+	int categorys[4]={DEFINE_VARIATION,DEFINE_ENCOUNTER,DEFINE_ITEM_COUNT,DEFINE_LEVEL};
 	int i;
-	for(i=0;i<3;i++)
+	for(i=0;i<4;i++)
 	{	
 		if (categorys[i]==id)
 			return true;
@@ -261,7 +320,8 @@ bool isCategory(int id)
 // scan and handle events
 void scanCheatMenu() {
 	int ret = scanMenu();
-	if (ret != -1) {
+	if (ret != -1) 
+	{
 		if(!isCategory(ret))
 		{
 			cheatEnabled[ret] = !cheatEnabled[ret];
