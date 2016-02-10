@@ -45,12 +45,10 @@ This plugin for NTR CFW adds some features to Pokemon X/Y/OR/AS.
 1. Item bag
 2. Medicine bag
 
-####known Item categorys:
+#### Known Items:
 
-* 1-16  Pokeballs
-* 17-54 Medicine
-* 55-70 Battle Items
-more will be added later to the list later
+The Items IDs Are listet id the wiki, please help to fill it:
+[Item ID Wiki](https://github.com/hartmannaf/PokemonCheatPlugin/wiki/itemList)
 
 ### Placement
 
