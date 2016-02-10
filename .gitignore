@@ -1,3 +1,7 @@
 bin
 obj
+tmp
+homebrew.map
+payload.bin
 *.txt
+cheat.plg
