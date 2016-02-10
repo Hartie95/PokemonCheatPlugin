@@ -1,17 +1,25 @@
 #include "helpers.h"
 
+typedef enum ItemBagsEnum 
+{  
+	itemBag,
+	medicineBag,
+	tmBag,
+	berryBag,
+	baseitemBaf
+} ItemBags;
+
 void initItemModifier(int edition);
 
-u32 getItemCountAddress(u32 position);
-void setItemCountAt(u32 position, u32 count);
-void addToItemCountAt(u32 position, u32 count);
-void removeFromItemCountAt(u32 position, u32 count);
+// Item modification
+void setItemIdAt(u32 position, ItemBags bag, u32 id);
+void incrementItemIdAt(u32 position, ItemBags bag, u32 count);
+void reduceItemIdAt(u32 position, ItemBags bag, u32 count);
 
-//NotJetImplementet
-void setItemAt();
+// Item count modification
+u32 getItemCountAddress(u32 position,ItemBags);
+void setItemCountAt(u32 position,ItemBags, u32 count);
+void addToItemCountAt(u32 position,ItemBags, u32 count);
+void removeFromItemCountAt(u32 position,ItemBags, u32 count);
 
-/*Medicine*/
-u32 getMedicineCountAddress(u32 position);
-void setMedicineCountAt(u32 position, u32 count);
-void addToMedicineCountAt(u32 position, u32 count);
-void removeFromMedicineCountAt(u32 position, u32 count);
+void deleteItem(u32 position, ItemBags bag);

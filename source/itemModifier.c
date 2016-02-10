@@ -6,7 +6,6 @@ unsigned int MedicinePointerOffset=0;
 unsigned int MedicineDataLength=0;
 
 #define ITEMIDPOSITION 0
-#define ITEMCATALOGPOSITION 1
 #define ITEMCOUNTPOSITION 2
 
 void initItemModifier(int edition)
@@ -35,50 +34,117 @@ void initItemModifier(int edition)
 	}
 }
 
-/*Item*/
-u32 getItemCountAddress(u32 position)
+u32 getBagStartAddress(ItemBags bag)
 {
-	position--;
-	return ItemPointerOffset+ItemDataLength*position+ITEMCOUNTPOSITION;
-}
-void setItemCountAt(u32 position, u32 count)
-{
-	position--;
-	*(vu16*)(ItemPointerOffset+ItemDataLength*position+ITEMCOUNTPOSITION)=count;
-}
-
-void addToItemCountAt(u32 position, u32 count)
-{
-	position--;
-	*(vu16*)(ItemPointerOffset+ItemDataLength*position+ITEMCOUNTPOSITION)+=count;
+	u32 address=0;
+	switch(bag)
+	{
+		case itemBag:
+			address=ItemPointerOffset;
+			break;
+		case medicineBag:
+			address=MedicinePointerOffset;
+			break;
+	}
+	return address;
 }
 
-void removeFromItemCountAt(u32 position, u32 count)
+u32 getItemPossitionAddress(u32 position, ItemBags bag)
+{
+	u32 itemPointer = getBagStartAddress(bag);
+	if(itemPointer>0)
+	{
+		position--;
+		itemPointer+=ItemDataLength*position;
+	}
+	return itemPointer;
+}
+
+// Item modification
+void setItemIdAt(u32 position, ItemBags bag, u32 id)
+{
+	u32 itemPointer=getItemPossitionAddress(position, bag);
+	if(itemPointer>0)
+	{
+		*(vu16*)itemPointer=id;
+	}
+}
+
+/*Todo get better max value*/
+void incrementItemIdAt(u32 position, ItemBags bag, u32 count)
+{
+	u32 itemPointer=getItemPossitionAddress(position, bag);
+	if(itemPointer>0)
+	{
+		if((*(vu16*)itemPointer+count)<0x3FF)
+			*(vu16*)itemPointer+=count;
+		else
+			*(vu16*)itemPointer=0x3FF;
+	}
+}
+
+void reduceItemIdAt(u32 position, ItemBags bag, u32 count)
+{
+	u32 itemPointer=getItemPossitionAddress(position, bag);
+	if(itemPointer>0)
+	{
+		if(count<*(vu16*)itemPointer)
+			*(vu16*)itemPointer-=count;
+		else
+			*(vu16*)itemPointer=1;
+	}
+}
+
+// Item count modification
+u32 getItemCountAddress(u32 position, ItemBags bag)
+{
+	u32 itemPointer = getItemPossitionAddress(position,bag);
+	if(itemPointer>0)
+	{
+		itemPointer+=ITEMCOUNTPOSITION;
+	}
+	return itemPointer;
+}
+
+void setItemCountAt(u32 position, ItemBags bag, u32 count)
+{
+	u32 itemCountPointer=getItemCountAddress(position, bag);
+	if(itemCountPointer>0)
+	{
+		*(vu16*)itemCountPointer=count;
+	}
+}
+
+void addToItemCountAt(u32 position, ItemBags bag, u32 count)
+{
+	u32 itemCountPointer=getItemCountAddress(position, bag);
+	if(itemCountPointer>0)
+	{
+		if(((u32)*(vu16*)itemCountPointer)+count<0xFFFF)
+			*(vu16*)itemCountPointer+=count;
+		else
+			*(vu16*)itemCountPointer=0xFFFF;
+	}
+}
+
+void removeFromItemCountAt(u32 position, ItemBags bag, u32 count)
 {	
-	position--;
-	*(vu16*)(ItemPointerOffset+ItemDataLength*position+ITEMCOUNTPOSITION)-=count;
+	u32 itemCountPointer=getItemCountAddress(position, bag);
+	if(itemCountPointer>0)
+	{
+		if(*(vu16*)itemCountPointer>count)
+			*(vu16*)itemCountPointer-=count;
+		else
+			*(vu16*)itemCountPointer=1;
+	}
 }
 
-/*Medicine*/
-u32 getMedicineCountAddress(u32 position)
+/* open bag and the item will be deleted*/
+void deleteItem(u32 position, ItemBags bag)
 {
-	position--;
-	return MedicinePointerOffset+MedicineDataLength*position+ITEMCOUNTPOSITION;
-}
-void setMedicineCountAt(u32 position, u32 count)
-{
-	position--;
-	*(vu16*)(MedicinePointerOffset+MedicineDataLength*position+ITEMCOUNTPOSITION)=count;
-}
-
-void addToMedicineCountAt(u32 position, u32 count)
-{
-	position--;
-	*(vu16*)(MedicinePointerOffset+MedicineDataLength*position+ITEMCOUNTPOSITION)+=count;
-}
-
-void removeFromMedicineCountAt(u32 position, u32 count)
-{	
-	position--;
-	*(vu16*)(MedicinePointerOffset+MedicineDataLength*position+ITEMCOUNTPOSITION)-=count;
+	u32 itemCountPointer=getItemCountAddress(position, bag);
+	if(itemCountPointer>0)
+	{
+		*(vu16*)itemCountPointer=0;
+	}
 }

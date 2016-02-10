@@ -20,25 +20,30 @@ u8 cheatEnabled[64];
 int isNewNtr = 0;
 int edition = 0;
 
-#define DEFINE_ENCOUNTER 0
-#define ENTRY_ENCOUNTER_RANDOMIZE 1
-#define ENTRY_ENCOUNTER_ITEM 2
-#define DEFINE_VARIATION 3
-#define ENTRY_VARIATION_RANDOMIZE 4
-#define ENTRY_VARIATION_ITEM 5
-#define DEFINE_LEVEL 6
-#define ENTRY_LEVEL_RANDOMIZE 7
-#define ENTRY_LEVEL_ITEM 8
-#define ENTRY_DEXNAV 9
-#define DEFINE_ITEM_COUNT 10
-#define ENTRY_ITEM_COUNT_1 11
-#define ENTRY_ITEM_COUNT_2 12
-#define ENTRY_ITEM_COUNT_3 13
-#define DEFINE_BETA_CHEATS 14
-#define ENTRY_MEDICINE_COUNT_1 15
-#define ENTRY_MAX_MONEY 16
-#define ENTRY_MAX_REPEL 17
-#define ENTRY_MAX_OPOWER 18
+enum menuEntrysEnum
+{
+	headerEncounter,
+	entryEncounterRandomize,
+	entryEncounterItem,
+	headerVariation,
+	entryVariationRandomize,
+	entryVariationItem,
+	headerWildLevel,
+	entryWildLevelRandomize,
+	entryWildLevelItem,
+	entryUpdateDexnav,
+	headerItemModifiers,
+	entryItemCount1,
+	entryItemCount2,
+	entryItemCount3,
+	entryMedicineCount1,
+	entryMedicineCount2,
+	entryMedicineCount3,
+	headerBetaCheats,
+	entryMaxMoney,
+	entryMaxRepel,
+	entryMaxOpower
+};
 
 // init 
 void initCheatMenu() {
@@ -53,12 +58,14 @@ void initCheatMenu() {
 	addOrCheatMenuEntry(" Random");
 	addOrCheatMenuEntry(" Third item count");
 	addCheatMenuEntry("Update Pokeradar(ORAS only)");
-	addMenuEntry("Item count modifier");
+	addMenuEntry("Item modifier");
 	addCheatMenuEntry(" Firts item  999x");
 	addCheatMenuEntry(" Second item 999x");
 	addCheatMenuEntry(" Third item  999x");
-	addMenuEntry("Untested Cheats");
 	addCheatMenuEntry(" Firts Medicine 999x");
+	addCheatMenuEntry(" Second Medicine 999x");
+	addCheatMenuEntry(" Third Medicine 999x");
+	addMenuEntry("Untested Cheats");
 	addCheatMenuEntry(" Max Money");
 	addCheatMenuEntry(" Unlimited repel");
 	addCheatMenuEntry(" Unlimited opower(ORAS only)");
@@ -72,7 +79,6 @@ void initPlugins()
 	initWildPokeModifier(edition);
 	initItemModifier(edition);
 	initOtherModifiers(edition);
-	
 }
 
 int scanMenu() {
@@ -104,73 +110,81 @@ void disableCheat(int id)
 
 // this function will be called when the state of cheat item changed
 void onCheatItemChanged(int id, int enable) {
-	// TODO: handle on cheat item is select or unselected
 	//Only one at time possible
 	//WildEncounterModifier
-	if(id==ENTRY_ENCOUNTER_RANDOMIZE&&enable==true)
+	if(id==entryEncounterRandomize&&enable==true)
 	{	
-		disableCheat(ENTRY_ENCOUNTER_ITEM);
-		disableCheat(ENTRY_ITEM_COUNT_1);
+		disableCheat(entryEncounterItem);
+		disableCheat(entryItemCount1);
 	}
-	else if(id==ENTRY_ENCOUNTER_ITEM&&enable==true)
+	else if(id==entryEncounterItem&&enable==true)
 	{	
-		disableCheat(ENTRY_ENCOUNTER_RANDOMIZE);
-		disableCheat(ENTRY_ITEM_COUNT_1);
+		disableCheat(entryEncounterRandomize);
+		disableCheat(entryItemCount1);
 	}
-	else if(id==ENTRY_ITEM_COUNT_1&&enable==true)
+	else if(id==entryItemCount1&&enable==true)
 	{	
-		disableCheat(ENTRY_ENCOUNTER_ITEM);
-		disableCheat(ENTRY_ENCOUNTER_RANDOMIZE);
+		disableCheat(entryEncounterItem);
+		disableCheat(entryEncounterRandomize);
 	}
 
-
+	
 	//WildVariationModifier
-	if(id==ENTRY_VARIATION_RANDOMIZE&&enable==true)
+	if(id==entryVariationRandomize&&enable==true)
 	{
-		disableCheat(ENTRY_VARIATION_ITEM);
-		disableCheat(ENTRY_ITEM_COUNT_2);
+		disableCheat(entryVariationItem);
+		disableCheat(entryItemCount2);
 	}
-	if(id==ENTRY_VARIATION_ITEM&&enable==true)
+	if(id==entryVariationItem&&enable==true)
 	{	
-		disableCheat(ENTRY_VARIATION_RANDOMIZE);
-		disableCheat(ENTRY_ITEM_COUNT_2);
+		disableCheat(entryVariationRandomize);
+		disableCheat(entryItemCount2);
 	}
-	else if(id==ENTRY_ITEM_COUNT_2&&enable==true)
+	else if(id==entryItemCount2&&enable==true)
 	{	
-		disableCheat(ENTRY_VARIATION_ITEM);
-		disableCheat(ENTRY_VARIATION_RANDOMIZE);
+		disableCheat(entryVariationItem);
+		disableCheat(entryVariationRandomize);
 	}
+
 
 	//WildLevelModifier
-	if(id==ENTRY_LEVEL_RANDOMIZE&&enable==true)
+	if(id==entryWildLevelRandomize&&enable==true)
 	{
-		disableCheat(ENTRY_LEVEL_ITEM);
-		disableCheat(ENTRY_ITEM_COUNT_3);
+		disableCheat(entryWildLevelItem);
+		disableCheat(entryItemCount3);
 	}
-	if(id==ENTRY_LEVEL_ITEM&&enable==true)
+	if(id==entryWildLevelItem&&enable==true)
 	{	
-		disableCheat(ENTRY_LEVEL_RANDOMIZE);
-		disableCheat(ENTRY_ITEM_COUNT_3);
+		disableCheat(entryWildLevelRandomize);
+		disableCheat(entryItemCount3);
 	}
-	else if(id==ENTRY_ITEM_COUNT_3&&enable==true)
+	else if(id==entryItemCount3&&enable==true)
 	{	
-		disableCheat(ENTRY_LEVEL_ITEM);
-		disableCheat(ENTRY_LEVEL_RANDOMIZE);
+		disableCheat(entryWildLevelItem);
+		disableCheat(entryWildLevelRandomize);
 	}
 
-	if(id==ENTRY_DEXNAV)
+	//only in oras supported
+	if(id==entryUpdateDexnav)
 	{
 		if(edition==PKXY)
-			disableCheat(ENTRY_DEXNAV);
+			disableCheat(entryUpdateDexnav);
+	}
+
+	//no address for XY
+	if(id==entryMaxOpower)
+	{
+		if(edition==PKXY)
+			disableCheat(entryMaxOpower);
 	}
 }
 
 // Handle cheats
 void handleCheats() {
-	if(cheatEnabled[ENTRY_ENCOUNTER_RANDOMIZE]
-			||cheatEnabled[ENTRY_ENCOUNTER_ITEM]
-			||cheatEnabled[ENTRY_VARIATION_RANDOMIZE]
-			||cheatEnabled[ENTRY_VARIATION_ITEM]) 
+	if(cheatEnabled[entryEncounterRandomize]
+			||cheatEnabled[entryEncounterItem]
+			||cheatEnabled[entryVariationRandomize]
+			||cheatEnabled[entryVariationItem]) 
 	{
 		u32 pokemonAddress=0;
 		u32 variationAddress=0;
@@ -178,140 +192,153 @@ void handleCheats() {
 		bool onlyUnseenPoke=false;
 		bool updateDexNav=false;
 
-		if(cheatEnabled[ENTRY_ENCOUNTER_RANDOMIZE])
+		if(cheatEnabled[entryEncounterRandomize])
 			pokemonAddress=1;
-		else if(cheatEnabled[ENTRY_ENCOUNTER_ITEM])
+		else if(cheatEnabled[entryEncounterItem])
 		{
-			pokemonAddress=getItemCountAddress(1);
+			pokemonAddress=getItemCountAddress(1,itemBag);
 			onlyUnseenPoke=true;
 		}
 
-		if(cheatEnabled[ENTRY_VARIATION_RANDOMIZE])
+		if(cheatEnabled[entryVariationRandomize])
 			variationAddress=1;
-		else if(cheatEnabled[ENTRY_VARIATION_ITEM])
-			variationAddress=getItemCountAddress(2);
+		else if(cheatEnabled[entryVariationItem])
+			variationAddress=getItemCountAddress(2,itemBag);
 
 
-		if(cheatEnabled[ENTRY_LEVEL_RANDOMIZE])
+		if(cheatEnabled[entryWildLevelRandomize])
 			levelAddress=1;
-		else if(cheatEnabled[ENTRY_LEVEL_ITEM])
-			levelAddress=getItemCountAddress(3);
+		else if(cheatEnabled[entryWildLevelItem])
+			levelAddress=getItemCountAddress(3,itemBag);
 
-		if(cheatEnabled[ENTRY_DEXNAV])
+		if(cheatEnabled[entryUpdateDexnav])
 			updateDexNav=true;
 
 		u32 key = getKey();
-		if(cheatEnabled[ENTRY_ENCOUNTER_ITEM])
+		if(cheatEnabled[entryEncounterItem])
 		{
 			switch(key)
 			{
 				case (BUTTONCOMBINATION_ENCOUNTER | BUTTONCOMBINATION_ADD_1):
-					addToItemCountAt(1,1);
+					addToItemCountAt(1,itemBag,1);
 					waitKeyCombinationChanged(BUTTONCOMBINATION_ENCOUNTER | BUTTONCOMBINATION_ADD_1);
 					break;
 				case (BUTTONCOMBINATION_ENCOUNTER | BUTTONCOMBINATION_REM_1):
-					removeFromItemCountAt(1,1);
+					removeFromItemCountAt(1,itemBag,1);
 					waitKeyCombinationChanged(BUTTONCOMBINATION_ENCOUNTER | BUTTONCOMBINATION_REM_1);
 					break;
 				case (BUTTONCOMBINATION_ENCOUNTER | BUTTONCOMBINATION_ADD_10):
-					addToItemCountAt(1,10);
+					addToItemCountAt(1,itemBag,10);
 					waitKeyCombinationChanged(BUTTONCOMBINATION_ENCOUNTER | BUTTONCOMBINATION_ADD_10);
 					break;
 				case (BUTTONCOMBINATION_ENCOUNTER | BUTTONCOMBINATION_REM_10):
-					removeFromItemCountAt(1,10);
+					removeFromItemCountAt(1,itemBag,10);
 					waitKeyCombinationChanged(BUTTONCOMBINATION_ENCOUNTER | BUTTONCOMBINATION_REM_10);
 					break;
 				case (BUTTONCOMBINATION_ENCOUNTER | BUTTON_A):
-					setItemCountAt(1,721);
+					setItemCountAt(1,itemBag,721);
 					break;
 			}
 		}
 
-		if(cheatEnabled[ENTRY_VARIATION_ITEM])
+		if(cheatEnabled[entryVariationItem])
 		{
 			switch(key)
 			{
 				case (BUTTONCOMBINATION_ENCOUNTER_VARIATION | BUTTONCOMBINATION_ADD_1):
-					addToItemCountAt(2,1);
+					addToItemCountAt(2,itemBag,1);
 					waitKeyCombinationChanged(BUTTONCOMBINATION_ENCOUNTER | BUTTON_B | BUTTONCOMBINATION_ADD_1);
 					break;
 				case (BUTTONCOMBINATION_ENCOUNTER_VARIATION | BUTTONCOMBINATION_REM_1):
-					removeFromItemCountAt(2,1);
+					removeFromItemCountAt(2,itemBag,1);
 					waitKeyCombinationChanged(BUTTONCOMBINATION_ENCOUNTER | BUTTONCOMBINATION_REM_1);
 					break;
 				case (BUTTONCOMBINATION_ENCOUNTER_VARIATION | BUTTONCOMBINATION_ADD_10):
-					addToItemCountAt(2,10);
+					addToItemCountAt(2,itemBag,10);
 					waitKeyCombinationChanged(BUTTONCOMBINATION_ENCOUNTER | BUTTONCOMBINATION_ADD_10);
 					break;
 				case (BUTTONCOMBINATION_ENCOUNTER_VARIATION | BUTTONCOMBINATION_REM_10):
-					removeFromItemCountAt(2,10);
+					removeFromItemCountAt(2,itemBag,10);
 					waitKeyCombinationChanged(BUTTONCOMBINATION_ENCOUNTER | BUTTONCOMBINATION_REM_10);
 					break;
 				case (BUTTONCOMBINATION_ENCOUNTER | BUTTON_A):
-					setItemCountAt(2,27);
+					setItemCountAt(2,itemBag,27);
 					break;
 			}
 		}
 
-		if(cheatEnabled[ENTRY_LEVEL_ITEM])
+		if(cheatEnabled[entryWildLevelItem])
 		{
 			switch(key)
 			{
 				case (BUTTONCOMBINATION_ENCOUNTER_LEVEL | BUTTONCOMBINATION_ADD_1):
-					addToItemCountAt(3,1);
+					addToItemCountAt(3,itemBag,1);
 					waitKeyCombinationChanged(BUTTONCOMBINATION_ENCOUNTER | BUTTON_B | BUTTONCOMBINATION_ADD_1);
 					break;
 				case (BUTTONCOMBINATION_ENCOUNTER_LEVEL | BUTTONCOMBINATION_REM_1):
-					removeFromItemCountAt(3,1);
+					removeFromItemCountAt(3,itemBag,1);
 					waitKeyCombinationChanged(BUTTONCOMBINATION_ENCOUNTER | BUTTONCOMBINATION_REM_1);
 					break;
 				case (BUTTONCOMBINATION_ENCOUNTER_LEVEL | BUTTONCOMBINATION_ADD_10):
-					addToItemCountAt(3,10);
+					addToItemCountAt(3,itemBag,10);
 					waitKeyCombinationChanged(BUTTONCOMBINATION_ENCOUNTER | BUTTONCOMBINATION_ADD_10);
 					break;
 				case (BUTTONCOMBINATION_ENCOUNTER_LEVEL | BUTTONCOMBINATION_REM_10):
-					removeFromItemCountAt(3,10);
+					removeFromItemCountAt(3,itemBag,10);
 					waitKeyCombinationChanged(BUTTONCOMBINATION_ENCOUNTER | BUTTONCOMBINATION_REM_10);
 					break;
 				case (BUTTONCOMBINATION_ENCOUNTER | BUTTON_A):
-					setItemCountAt(3,100);
+					setItemCountAt(3,itemBag,100);
 					break;
 			}
 		}
 		setWildPokemonfromAddress(pokemonAddress,variationAddress, levelAddress,onlyUnseenPoke,updateDexNav);
 	}
 
-	if(cheatEnabled[ENTRY_ITEM_COUNT_1]) {
-		setItemCountAt(1,999);
+	if(cheatEnabled[entryItemCount1]) {
+		setItemCountAt(1,itemBag,999);
 	}
-	if(cheatEnabled[ENTRY_ITEM_COUNT_2]) {
-		setItemCountAt(2,999);
+	if(cheatEnabled[entryItemCount2]) {
+		setItemCountAt(2,itemBag,999);
 	}
-	if(cheatEnabled[ENTRY_ITEM_COUNT_3]) {
-		setItemCountAt(3,999);
+	if(cheatEnabled[entryItemCount3]) {
+		setItemCountAt(3,itemBag,999);
 	}
-	if(cheatEnabled[ENTRY_MEDICINE_COUNT_1]) {
-		setMedicineCountAt(1,999);
+	if(cheatEnabled[entryMedicineCount1]) {
+		setItemCountAt(1,medicineBag,999);
 	}
-	if(cheatEnabled[ENTRY_MAX_MONEY]) {
+	if(cheatEnabled[entryMedicineCount2]) {
+		setItemCountAt(2,medicineBag,999);
+	}
+	if(cheatEnabled[entryMedicineCount3]) {
+		setItemCountAt(3,medicineBag,999);
+	}
+	if(cheatEnabled[entryMaxMoney]) {
 		setMoney(0x98967F);
 	}
-	if(cheatEnabled[ENTRY_MAX_REPEL]) {
+	if(cheatEnabled[entryMaxRepel]) {
 		setRemainingRepel(0x00FA004D);
 	}
-	if(cheatEnabled[ENTRY_MAX_OPOWER]) {
+	if(cheatEnabled[entryMaxOpower]) {
 		setRemainingOPower(10);
 	}
 
 }
 
-bool isCategory(int id)
+bool isHeader(int id)
 {
-	int categorys[4]={DEFINE_VARIATION,DEFINE_ENCOUNTER,DEFINE_ITEM_COUNT,DEFINE_LEVEL};
+	u32 headerCount=5;
+	int headerIDs[5]={
+						headerVariation,
+						headerEncounter,
+						headerBetaCheats,
+						headerItemModifiers,
+						headerWildLevel
+					};
 	int i;
-	for(i=0;i<4;i++)
+	for(i=0;i<headerCount;i++)
 	{	
-		if (categorys[i]==id)
+		if (headerIDs[i]==id)
 			return true;
 	}
 	return false;
@@ -322,7 +349,7 @@ void scanCheatMenu() {
 	int ret = scanMenu();
 	if (ret != -1) 
 	{
-		if(!isCategory(ret))
+		if(!isHeader(ret))
 		{
 			cheatEnabled[ret] = !cheatEnabled[ret];
 			updateCheatEnableDisplay(ret);
