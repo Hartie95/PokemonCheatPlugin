@@ -10,25 +10,50 @@ This plugin for NTR CFW adds some features to Pokemon X/Y/OR/AS.
    * Random/by item count
  * Variation
    * Random/by item count
+ * Level
+   * Random/by item count
 * ItemModifier
+  * Item type
   * Item count
 
 ### Planned features
 
 * random trainer pokemon
-* define wild encounter level(by item/random)
+* maybe all Items cheat
 
 ### Usage
 
-* Wild encounter modifier(Item)
+* Wild encounter modifier(Item bag)
  * Species
-   * Press L+R+A to set the first item to 721
-   * Modifie the item count using:L+R+UP(+1)/L+R+DOWN(-1)L+R+RIGTH(+10)/L+R+LEFT(-10) 
+   * Press L+A to set the first item count to 721
+   * Modifie the item count using:L+UP(+1)/L+DOWN(-1)L+RIGTH(+10)/L+LEFT(-10) 
  * Variation
-   * Press L+R+A to set the second item to 27
-   * Modifie the item count using:L+R+B+UP(+1)/L+R+B+DOWN(-1)L+R+B+RIGTH(+10)/L+R+B+LEFT(-10) 
+   * Press L+A to set the second item count to 27
+   * Modifie the item count using:L+B+UP(+1)/L+B+DOWN(-1)L+B+RIGTH(+10)/L+B+LEFT(-10) 
+ * Level
+   * Press L+A to set the third item count to 100
+   * Modifie the item count using:L+X+UP(+1)/L+X+DOWN(-1)L+X+RIGTH(+10)/L+X+LEFT(-10) 
+* ItemModifier
+  * Item type(uses the medicine bag items)
+   * Press R+A to set the first three medicine counts item count to 1
+   * Modifie the item id(third medicine) using:R+UP(+1)/R+DOWN(-1)R+RIGTH(+10)/R+LEFT(-10)
+   * Modifie the item bag(second medicine) using:R+B+UP(+1)/R+B+DOWN(-1)R+B+RIGTH(+10)/R+B+LEFT(-10)  
+   * Modifie the item position(first medicine):R+X+UP(+1)/R+X+DOWN(-1)R+X+RIGTH(+10)/R+X+LEFT(-10)
+
+####Supported itemBags
+
+1. Item bag
+2. Medicine bag
+
+####known Item categorys:
+
+* 1-16  Pokeballs
+* 17-54 Medicine
+* 55-70 Battle Items
+more will be added later to the list later
 
 ### Placement
+
 * X:  /plugin/0004000000055D00/
 * Y:  /plugin/0004000000055E00/
 * OR: /plugin/000400000011C400/
