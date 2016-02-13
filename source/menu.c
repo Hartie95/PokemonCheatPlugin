@@ -21,13 +21,13 @@ void addMenuEntry(u8* str) {
 // add one cheat menu entry
 void addCheatMenuEntry(u8* str) {
 	u8 buf[100];
-	xsprintf(buf, "[ ] %s", str);
+	xsprintf(buf, " [ ] %s", str);
 	addMenuEntry(buf);
 }
 
 void addOrCheatMenuEntry(u8* str) {
 	u8 buf[100];
-	xsprintf(buf, "( ) %s", str);
+	xsprintf(buf, " ( ) %s", str);
 	addMenuEntry(buf);
 }
 

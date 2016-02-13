@@ -23,7 +23,7 @@ FS_archive sdmcArchive;
 u8 cheatEnabled[64];
 int isNewNtr = 0;
 int edition = 0;
-
+u32 curkey=0;
 enum menuEntrysEnum
 {
 	headerEncounter,
@@ -45,6 +45,7 @@ enum menuEntrysEnum
 	entryMedicineCount2,
 	entryMedicineCount3,
 	headerBetaCheats,
+	entryAllItems,
 	entryMaxMoney,
 	entryMaxRepel,
 	entryMaxOpower
@@ -62,7 +63,7 @@ void initCheatMenu() {
 	addMenuEntry("Wild Encounter level modifier");
 	addOrCheatMenuEntry(" Random");
 	addOrCheatMenuEntry(" Third item count");
-	addCheatMenuEntry("Update Pokeradar(ORAS only)");
+	addCheatMenuEntry("Update Dexnav(ORAS only)");
 	addMenuEntry("Item modifier");
 	addCheatMenuEntry(" Item modifier(using medicine count)");
 	addCheatMenuEntry(" Firts item  999x");
@@ -72,6 +73,7 @@ void initCheatMenu() {
 	addCheatMenuEntry(" Second Medicine 999x");
 	addCheatMenuEntry(" Third Medicine 999x");
 	addMenuEntry("Untested Cheats");
+	addCheatMenuEntry(" Get all items");
 	addCheatMenuEntry(" Max Money");
 	addCheatMenuEntry(" Unlimited repel");
 	addCheatMenuEntry(" Unlimited opower(ORAS only)");
@@ -200,9 +202,37 @@ void onCheatItemChanged(int id, int enable) {
 	}
 }
 
+bool checkForItemModKeyCombo(u32 position,ItemBags bag,u32 baseCombination )
+{
+	bool done=false;
+	if(curkey==(baseCombination | BUTTONCOMBINATION_ADD_1))
+	{	
+		addToItemCountAt(position,bag,1);
+		waitKeyCombinationChanged(baseCombination | BUTTONCOMBINATION_ADD_1);
+		done=true;
+	}else if(curkey==(baseCombination | BUTTONCOMBINATION_REM_1))
+	{
+		removeFromItemCountAt(position,bag,1);
+		waitKeyCombinationChanged(baseCombination | BUTTONCOMBINATION_REM_1);
+		done=true;
+	}else if(curkey==(baseCombination | BUTTONCOMBINATION_ADD_10))
+	{
+		addToItemCountAt(position,bag,10);
+		waitKeyCombinationChanged(baseCombination | BUTTONCOMBINATION_REM_1);
+		done=true;
+	}else if(curkey==(baseCombination | BUTTONCOMBINATION_REM_10))
+	{
+		removeFromItemCountAt(position,bag,10);
+		waitKeyCombinationChanged(baseCombination | BUTTONCOMBINATION_REM_10);
+		done=true;
+	}
+	
+	return done;
+}
+
 // Handle cheats
 void handleCheats() {
-	u32 key = getKey();
+	curkey=getKey();
 	if(cheatEnabled[entryEncounterRandomize]
 			||cheatEnabled[entryEncounterItem]
 			||cheatEnabled[entryVariationRandomize]
@@ -238,150 +268,54 @@ void handleCheats() {
 
 		if(cheatEnabled[entryEncounterItem])
 		{
-			switch(key)
-			{
-				case (BUTTONCOMBINATION_ENCOUNTER | BUTTONCOMBINATION_ADD_1):
-					addToItemCountAt(1,itemBag,1);
-					waitKeyCombinationChanged(BUTTONCOMBINATION_ENCOUNTER | BUTTONCOMBINATION_ADD_1);
-					break;
-				case (BUTTONCOMBINATION_ENCOUNTER | BUTTONCOMBINATION_REM_1):
-					removeFromItemCountAt(1,itemBag,1);
-					waitKeyCombinationChanged(BUTTONCOMBINATION_ENCOUNTER | BUTTONCOMBINATION_REM_1);
-					break;
-				case (BUTTONCOMBINATION_ENCOUNTER | BUTTONCOMBINATION_ADD_10):
-					addToItemCountAt(1,itemBag,10);
-					waitKeyCombinationChanged(BUTTONCOMBINATION_ENCOUNTER | BUTTONCOMBINATION_ADD_10);
-					break;
-				case (BUTTONCOMBINATION_ENCOUNTER | BUTTONCOMBINATION_REM_10):
-					removeFromItemCountAt(1,itemBag,10);
-					waitKeyCombinationChanged(BUTTONCOMBINATION_ENCOUNTER | BUTTONCOMBINATION_REM_10);
-					break;
-				case (BUTTONCOMBINATION_ENCOUNTER | BUTTON_A):
-					setItemCountAt(1,itemBag,721);
-					break;
-			}
+			if(curkey==(BUTTONCOMBINATION_ENCOUNTER | BUTTON_A))
+				setItemCountAt(1,itemBag,721);
+
+			checkForItemModKeyCombo(1,itemBag,BUTTONCOMBINATION_ENCOUNTER);
 		}
 
 		if(cheatEnabled[entryVariationItem])
 		{
-			switch(key)
-			{
-				case (BUTTONCOMBINATION_ENCOUNTER_VARIATION | BUTTONCOMBINATION_ADD_1):
-					addToItemCountAt(2,itemBag,1);
-					waitKeyCombinationChanged(BUTTONCOMBINATION_ENCOUNTER | BUTTON_B | BUTTONCOMBINATION_ADD_1);
-					break;
-				case (BUTTONCOMBINATION_ENCOUNTER_VARIATION | BUTTONCOMBINATION_REM_1):
-					removeFromItemCountAt(2,itemBag,1);
-					waitKeyCombinationChanged(BUTTONCOMBINATION_ENCOUNTER | BUTTONCOMBINATION_REM_1);
-					break;
-				case (BUTTONCOMBINATION_ENCOUNTER_VARIATION | BUTTONCOMBINATION_ADD_10):
-					addToItemCountAt(2,itemBag,10);
-					waitKeyCombinationChanged(BUTTONCOMBINATION_ENCOUNTER | BUTTONCOMBINATION_ADD_10);
-					break;
-				case (BUTTONCOMBINATION_ENCOUNTER_VARIATION | BUTTONCOMBINATION_REM_10):
-					removeFromItemCountAt(2,itemBag,10);
-					waitKeyCombinationChanged(BUTTONCOMBINATION_ENCOUNTER | BUTTONCOMBINATION_REM_10);
-					break;
-				case (BUTTONCOMBINATION_ENCOUNTER | BUTTON_A):
-					setItemCountAt(2,itemBag,27);
-					break;
-			}
+			checkForItemModKeyCombo(2,itemBag,BUTTONCOMBINATION_ENCOUNTER_VARIATION);
+			if(curkey==(BUTTONCOMBINATION_ENCOUNTER | BUTTON_A))
+				setItemCountAt(2,itemBag,27);
 		}
 
 		if(cheatEnabled[entryWildLevelItem])
 		{
-			switch(key)
-			{
-				case (BUTTONCOMBINATION_ENCOUNTER_LEVEL | BUTTONCOMBINATION_ADD_1):
-					addToItemCountAt(3,itemBag,1);
-					waitKeyCombinationChanged(BUTTONCOMBINATION_ENCOUNTER | BUTTON_B | BUTTONCOMBINATION_ADD_1);
-					break;
-				case (BUTTONCOMBINATION_ENCOUNTER_LEVEL | BUTTONCOMBINATION_REM_1):
-					removeFromItemCountAt(3,itemBag,1);
-					waitKeyCombinationChanged(BUTTONCOMBINATION_ENCOUNTER | BUTTONCOMBINATION_REM_1);
-					break;
-				case (BUTTONCOMBINATION_ENCOUNTER_LEVEL | BUTTONCOMBINATION_ADD_10):
-					addToItemCountAt(3,itemBag,10);
-					waitKeyCombinationChanged(BUTTONCOMBINATION_ENCOUNTER | BUTTONCOMBINATION_ADD_10);
-					break;
-				case (BUTTONCOMBINATION_ENCOUNTER_LEVEL | BUTTONCOMBINATION_REM_10):
-					removeFromItemCountAt(3,itemBag,10);
-					waitKeyCombinationChanged(BUTTONCOMBINATION_ENCOUNTER | BUTTONCOMBINATION_REM_10);
-					break;
-				case (BUTTONCOMBINATION_ENCOUNTER | BUTTON_A):
-					setItemCountAt(3,itemBag,100);
-					break;
-			}
+			checkForItemModKeyCombo(3,itemBag,BUTTONCOMBINATION_ENCOUNTER_LEVEL);
+			if(curkey==(BUTTONCOMBINATION_ENCOUNTER | BUTTON_A))
+				setItemCountAt(3,itemBag,100);
 		}
 		setWildPokemonfromAddress(pokemonAddress,variationAddress, levelAddress,onlyUnseenPoke,updateDexNav);
 	}
 
 	if(cheatEnabled[entryItemModifier])
 	{
-		switch(key)
+		bool updatedPosition=false;
+		
+		updatedPosition=checkForItemModKeyCombo(1,medicineBag,BUTTONCOMBINATION_ITEM_MODIFIER_POSITION);
+		updatedPosition=checkForItemModKeyCombo(2,medicineBag,BUTTONCOMBINATION_ITEM_MODIFIER_BAG);
+		checkForItemModKeyCombo(3,medicineBag,BUTTONCOMBINATION_ITEM_MODIFIER_ID);
+			
+
+		if(curkey==(BUTTONCOMBINATION_ITEM_MODIFIER | BUTTON_A))
 		{
-			case (BUTTONCOMBINATION_ITEM_MODIFIER_POSITION | BUTTONCOMBINATION_ADD_1):
-				addToItemCountAt(1,medicineBag,1);
-				waitKeyCombinationChanged(BUTTONCOMBINATION_ITEM_MODIFIER_POSITION | BUTTONCOMBINATION_ADD_1);
-				break;
-			case (BUTTONCOMBINATION_ITEM_MODIFIER_POSITION | BUTTONCOMBINATION_REM_1):
-				removeFromItemCountAt(1,medicineBag,1);
-				waitKeyCombinationChanged(BUTTONCOMBINATION_ITEM_MODIFIER_POSITION | BUTTONCOMBINATION_REM_1);
-				break;
-			case (BUTTONCOMBINATION_ITEM_MODIFIER_POSITION | BUTTONCOMBINATION_ADD_10):
-				addToItemCountAt(1,medicineBag,10);
-				waitKeyCombinationChanged(BUTTONCOMBINATION_ITEM_MODIFIER_POSITION | BUTTONCOMBINATION_ADD_10);
-				break;
-			case (BUTTONCOMBINATION_ITEM_MODIFIER_POSITION | BUTTONCOMBINATION_REM_10):
-				removeFromItemCountAt(1,medicineBag,10);
-				waitKeyCombinationChanged(BUTTONCOMBINATION_ITEM_MODIFIER_POSITION | BUTTONCOMBINATION_REM_10);
-				break;
-
-			case (BUTTONCOMBINATION_ITEM_MODIFIER_BAG | BUTTONCOMBINATION_ADD_1):
-				addToItemCountAt(2,medicineBag,1);
-				waitKeyCombinationChanged(BUTTONCOMBINATION_ITEM_MODIFIER_BAG | BUTTONCOMBINATION_ADD_1);
-				break;
-			case (BUTTONCOMBINATION_ITEM_MODIFIER_BAG | BUTTONCOMBINATION_REM_1):
-				removeFromItemCountAt(2,medicineBag,1);
-				waitKeyCombinationChanged(BUTTONCOMBINATION_ITEM_MODIFIER_BAG | BUTTONCOMBINATION_REM_1);
-				break;
-			case (BUTTONCOMBINATION_ITEM_MODIFIER_BAG | BUTTONCOMBINATION_ADD_10):
-				addToItemCountAt(2,medicineBag,10);
-				waitKeyCombinationChanged(BUTTONCOMBINATION_ITEM_MODIFIER_BAG | BUTTONCOMBINATION_ADD_10);
-				break;
-			case (BUTTONCOMBINATION_ITEM_MODIFIER_BAG | BUTTONCOMBINATION_REM_10):
-				removeFromItemCountAt(2,medicineBag,10);
-				waitKeyCombinationChanged(BUTTONCOMBINATION_ITEM_MODIFIER_BAG | BUTTONCOMBINATION_REM_10);
-				break;
-
-			case (BUTTONCOMBINATION_ITEM_MODIFIER_ID | BUTTONCOMBINATION_ADD_1):
-				addToItemCountAt(3,medicineBag,1);
-				waitKeyCombinationChanged(BUTTONCOMBINATION_ITEM_MODIFIER_ID | BUTTONCOMBINATION_ADD_1);
-				break;
-			case (BUTTONCOMBINATION_ITEM_MODIFIER_ID | BUTTONCOMBINATION_REM_1):
-				removeFromItemCountAt(3,medicineBag,1);
-				waitKeyCombinationChanged(BUTTONCOMBINATION_ITEM_MODIFIER_ID | BUTTONCOMBINATION_REM_1);
-				break;
-			case (BUTTONCOMBINATION_ITEM_MODIFIER_ID | BUTTONCOMBINATION_ADD_10):
-				addToItemCountAt(3,medicineBag,10);
-				waitKeyCombinationChanged(BUTTONCOMBINATION_ITEM_MODIFIER_ID | BUTTONCOMBINATION_ADD_10);
-				break;
-			case (BUTTONCOMBINATION_ITEM_MODIFIER_ID | BUTTONCOMBINATION_REM_10):
-				removeFromItemCountAt(3,medicineBag,10);
-				waitKeyCombinationChanged(BUTTONCOMBINATION_ITEM_MODIFIER_ID | BUTTONCOMBINATION_REM_10);
-				break;
-
-			case (BUTTONCOMBINATION_ITEM_MODIFIER | BUTTON_A):
-				setItemCountAt(1,medicineBag,1);
-				setItemCountAt(2,medicineBag,1);
-				setItemCountAt(3,medicineBag,1);
-				break;
+			setItemCountAt(1,medicineBag,1);
+			setItemCountAt(2,medicineBag,1);
+			setItemCountAt(3,medicineBag,1);
 		}
 
 		u32 targetItemPosition=*(vu16*)getItemCountAddress(1,medicineBag);
 		u32 targetItemBag=*(vu16*)getItemCountAddress(2,medicineBag)-1;
 		u32 targetItemID=*(vu16*)getItemCountAddress(3,medicineBag);
-		setItemIdAt(targetItemPosition, targetItemBag, targetItemID);
+		if(updatedPosition==true)
+		{
+			u32 curItemID=getItemIdAt(targetItemPosition, targetItemBag);
+			setItemCountAt(3,medicineBag,curItemID);
+		}
+		else
+			setItemIdAt(targetItemPosition, targetItemBag, targetItemID);
 	}
 
 	if(cheatEnabled[entryItemCount1]) {
@@ -410,6 +344,9 @@ void handleCheats() {
 	}
 	if(cheatEnabled[entryMaxOpower]) {
 		setRemainingOPower(10);
+	}
+	if(cheatEnabled[entryAllItems]) {
+		getAllItems();
 	}
 
 }

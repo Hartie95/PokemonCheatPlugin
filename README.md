@@ -12,9 +12,17 @@ This plugin for NTR CFW adds some features to Pokemon X/Y/OR/AS.
    * Random/by item count
  * Level
    * Random/by item count
+ * Update dexnav
 * ItemModifier
   * Item type
   * Item count
+
+### The Beta Cheats
+
+* Get all Items(x999)
+* infinit repel (ORAS only?)
+* Max money
+* Unlimited opower(ORAS only)
 
 ### Planned features
 
@@ -40,10 +48,13 @@ This plugin for NTR CFW adds some features to Pokemon X/Y/OR/AS.
    * Modifie the item bag(second medicine) using:R+B+UP(+1)/R+B+DOWN(-1)R+B+RIGTH(+10)/R+B+LEFT(-10)  
    * Modifie the item position(first medicine):R+X+UP(+1)/R+X+DOWN(-1)R+X+RIGTH(+10)/R+X+LEFT(-10)
 
-####Supported itemBags
+#### Supported itemBags
 
 1. Item bag
 2. Medicine bag
+3. TM/HM bag
+4. Berry bag
+5. Key item bag
 
 #### Known Items:
 
