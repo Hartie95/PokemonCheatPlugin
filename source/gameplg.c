@@ -3,6 +3,8 @@
 #include "pokeEncounterModifier.h"
 #include "itemModifier.h"
 #include "otherModifiers.h"
+#include "battle/wildModifier.h"
+#include "battle/statsModifier.h"
 
 #define BUTTONCOMBINATION_ENCOUNTER BUTTON_L
 #define BUTTONCOMBINATION_ENCOUNTER_VARIATION BUTTONCOMBINATION_ENCOUNTER|BUTTON_B
@@ -29,6 +31,7 @@ enum menuEntrysEnum
 	headerEncounter,
 	entryEncounterRandomize,
 	entryEncounterItem,
+	entryEncounterShiny,
 	headerVariation,
 	entryVariationRandomize,
 	entryVariationItem,
@@ -44,6 +47,10 @@ enum menuEntrysEnum
 	entryMedicineCount1,
 	entryMedicineCount2,
 	entryMedicineCount3,
+	headerBattleModifiers,
+	entryUnlimitedHP,
+	entryUnlimitedPP,
+	entryCatchRate,
 	headerBetaCheats,
 	entryAllItems,
 	entryMaxMoney,
@@ -57,6 +64,7 @@ void initCheatMenu() {
 	addMenuEntry("Wild Encounter modifier");
 	addOrCheatMenuEntry(" Random(only unseen)");
 	addOrCheatMenuEntry(" First item count");
+	addCheatMenuEntry(" Shiny Pokemon");
 	addMenuEntry("Wild Encounter variation modifier");
 	addOrCheatMenuEntry(" Random");
 	addOrCheatMenuEntry(" Second item count");
@@ -66,12 +74,16 @@ void initCheatMenu() {
 	addCheatMenuEntry("Update Dexnav(ORAS only)");
 	addMenuEntry("Item modifier");
 	addCheatMenuEntry(" Item modifier(using medicine count)");
-	addCheatMenuEntry(" Firts item  999x");
+	addCheatMenuEntry(" First item  999x");
 	addCheatMenuEntry(" Second item 999x");
 	addCheatMenuEntry(" Third item  999x");
-	addCheatMenuEntry(" Firts Medicine 999x");
+	addCheatMenuEntry(" First Medicine 999x");
 	addCheatMenuEntry(" Second Medicine 999x");
 	addCheatMenuEntry(" Third Medicine 999x");
+	addMenuEntry("Battle modifier");
+	addCheatMenuEntry(" Unlimited HP");
+	addCheatMenuEntry(" Unlimited PP");
+	addCheatMenuEntry(" 100% Catch Rate");
 	addMenuEntry("Untested Cheats");
 	addCheatMenuEntry(" Get all items");
 	addCheatMenuEntry(" Max Money");
@@ -87,6 +99,8 @@ void initPlugins()
 	initWildPokeModifier(edition);
 	initItemModifier(edition);
 	initOtherModifiers(edition);
+	initWildModifier(edition);
+	initStatsModifier(edition);
 }
 
 int scanMenu() {
@@ -348,6 +362,28 @@ void handleCheats() {
 	if(cheatEnabled[entryAllItems]) {
 		getAllItems();
 	}
+	
+	if(cheatEnabled[entryEncounterShiny])
+	{
+		PK6 pkm;
+		if(getCurrentPokemon(&pkm))
+		{
+			makeShiny(&pkm);
+			setCurrentPokemon(&pkm);
+		}
+	}
+	
+	if(cheatEnabled[entryUnlimitedHP])
+	{
+		setMaxHP(0xFFFF);
+		setCurrentHP(0xFFFF);
+	}
+	
+	if(cheatEnabled[entryUnlimitedPP])
+		setAllPPMax();
+	
+	if(cheatEnabled[entryCatchRate])
+		setAutomaticCatchSuccess();
 
 }
 
