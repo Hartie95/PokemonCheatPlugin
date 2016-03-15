@@ -16,4 +16,6 @@ void setIV(PK6* pk6, Stats s, u8 amount);
 
 void setAutomaticCatchSuccess();
 
+u8 isShiny(PK6* pk6);
+
 #endif
