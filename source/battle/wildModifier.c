@@ -84,3 +84,8 @@ void setAutomaticCatchSuccess()
 		}
 	}
 }
+
+u8 isShiny(PK6* pk6)
+{
+	return (*TID ^ *SID ^ (u16)(pk6->PID & 0x0000FFFF) ^ (u16)((pk6->PID & 0xFFFF0000) >> 16)) < 16;
+}
