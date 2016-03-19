@@ -125,7 +125,7 @@ int detectLanguage() {
 }
 // update the menu status
 void updateCheatEnableDisplay(int id) {
-	gamePluginMenu.buf[gamePluginMenu.offsetInBuffer[id] + 1] = cheatEnabled[id] ? 'X' : ' ';
+	gamePluginMenu.buf[gamePluginMenu.offsetInBuffer[id] + 2] = cheatEnabled[id] ? 'X' : ' ';
 }
 
 void disableCheat(int id)
