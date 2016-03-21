@@ -51,6 +51,8 @@ enum menuEntrysEnum
 	entryUnlimitedHP,
 	entryUnlimitedPP,
 	entryCatchRate,
+	entryExpPoints,
+	entryOpponent1HP,
 	headerBetaCheats,
 	entryAllItems,
 	entryMaxMoney,
@@ -84,6 +86,8 @@ void initCheatMenu() {
 	addCheatMenuEntry(" Unlimited HP");
 	addCheatMenuEntry(" Unlimited PP");
 	addCheatMenuEntry(" 100% Catch Rate");
+	addCheatMenuEntry(" 1.000.000Exp Points");
+	addCheatMenuEntry(" Opponent 1 HP");
 	addMenuEntry("Untested Cheats");
 	addCheatMenuEntry(" Get all items");
 	addCheatMenuEntry(" Max Money");
@@ -375,12 +379,20 @@ void handleCheats() {
 	
 	if(cheatEnabled[entryUnlimitedHP])
 	{
-		setMaxHP(0xFFFF);
-		setCurrentHP(0xFFFF);
+		setPartyMaxHP(0xFFFF);
+		setPartyCurrentHP(0xFFFF);
+	}
+	
+	if(cheatEnabled[entryOpponent1HP])
+	{
+		setOpponentCurrentHP(1);
 	}
 	
 	if(cheatEnabled[entryUnlimitedPP])
 		setAllPPMax();
+		
+	if(cheatEnabled[entryExpPoints])
+		setGainExp(1000000);
 	
 	if(cheatEnabled[entryCatchRate])
 		setAutomaticCatchSuccess();
@@ -441,7 +453,7 @@ void gamePluginEntry() {
 	initPlugins();
 	initCheatMenu();
 	while (1) {
-		svc_sleepThread(100000000);
+		svc_sleepThread(1000000);
 		scanCheatMenu();
 		handleCheats();
 	}
