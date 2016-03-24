@@ -253,8 +253,12 @@ int GetRandomPokemon(bool checkObtained)
 		result = RandMinMax(1, 721);
 	}
 	while (isObtained(result)&&checkObtained);
+	
 	return result;
 }
+
+unsigned short last = 0xFFFF;
+unsigned short pok[721];
 
 void setWildPokemonfromAddress(	u32 pokemonAddress,
 								u32 pokemonVariation,
@@ -272,7 +276,16 @@ void setWildPokemonfromAddress(	u32 pokemonAddress,
 			//Check if ZO File contains encounter data
 			if (Read32(ZOOffset + 0x10) != Read32(ZOOffset + 0x14))
 			{
+				//If the route has changed
+				if(last == Read16(PointerOffset+4)) return;
+				last = Read16(PointerOffset+4);
+				
 				unsigned int EncOffset = ZOOffset + Read32(ZOOffset + 0x10) + ByteJump;
+				
+				//Make sure the table for the dexnav is exactley the same as the one used for normal encounters	
+				if(curEdition == ORAS && updatePokeRadar)
+					memcpy((void*)(0x16B3df40 + Read32(0x16B3df40 + 4 + Read16(PointerOffset+4)*4) + ByteJump), (void*)EncOffset, 0xF4);
+				
 				int i;
 				int pokemon=1;
 				u32 currentEncOffset;
@@ -306,22 +319,31 @@ void setWildPokemonfromAddress(	u32 pokemonAddress,
 							Write8(currentEncOffset+2, RandMinMax(2,100));
 						//Write8(EncOffset + i+3, 1); //maybefiller?
 
+						//Associate the pokemon id replaced with the one we use to overwrite it
+						pok[Read16(currentEncOffset)-1] = pokemon;
+						
 						Write16(currentEncOffset, pokemon);
 					}
 				}
 
-				//Update DexNav
+				/*Update DexNav => the dexnav is not updated when we go to a location without any possible encounter,
+				 *so when we return to the previous route the dexnav does not show the good species, a battle is necessary to reload it.
+				 */
 				if(updatePokeRadar&&curEdition==ORAS)
 				{
 					int j;
-					for (i = 0; i < 96; i++)
+					for (j = 0; j < EncDataLength; j += 4)
 					{
-						for (j = 0; j < EncDataLength; j += 4)
-						{
-							Write32(0x16B3E7B6 + (0x104 * i) + j, Read32(EncOffset + j));
-						}
+						//Replace the pokemon id according to the one associated with it in the array
+						unsigned int loc = 0x16B3df40 + Read32(0x16B3df40 + 4 + Read16(PointerOffset+4)*4) + ByteJump + j;
+						if(Read16(loc) != 0) Write16(loc, pok[Read16(loc)-1]);
+					
 					}
 				}
+			}
+			else
+			{
+				last = 0xFFFF;
 			}
 		}
 	}
