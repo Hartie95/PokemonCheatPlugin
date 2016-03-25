@@ -45,18 +45,21 @@ void initStatsModifier(int edition)
 void setMaxHP(u32* first, u32* second, u16 HP)
 {
 	if(*first > 0x08000000 && *first < 0x08DF0000 && *second > 0x08000000 && *second < 0x08DF0000 && *(vu32*)(*first+ HP_JUMP) == *(vu32*)(*second+ HP_JUMP))
-	{
+	{		
 		*(vu16*)(*first + HP_JUMP) = HP;
 		*(vu16*)(*second + HP_JUMP) = HP;
 	}	
 }
 
-void setCurrentHP(u32* first, u32* second, u16 HP)
+void setCurrentHP(u32* first, u32* second, u16 HP, u16 sup)
 {
 	if(*first > 0x08000000 && *first < 0x08DF0000 && *second > 0x08000000 && *second < 0x08DF0000 && *(vu32*)(*first+ HP_JUMP) == *(vu32*)(*second+ HP_JUMP))
 	{
+		if(*(vu16*)(*first + HP_JUMP + 0x2) > sup)
+		{
 		*(vu16*)(*first + HP_JUMP + 0x2) = HP;
 		*(vu16*)(*second + HP_JUMP + 0x2) = HP;
+		}
 	}
 }
 
@@ -72,12 +75,13 @@ void setOpponentMaxHP(u16 HP)
 
 void setPartyCurrentHP(u16 HP)
 {
-	setCurrentHP(PARTY_1, PARTY_2, HP);
+	setCurrentHP(PARTY_1, PARTY_2, HP, 0);
 }
 
 void setOpponentCurrentHP(u16 HP)
 {
-	setCurrentHP(OPPONENT_1, OPPONENT_2, HP);
+	
+	setCurrentHP(OPPONENT_1, OPPONENT_2, HP, HP);
 }
 
 void setAllPPMax()

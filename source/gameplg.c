@@ -5,6 +5,7 @@
 #include "otherModifiers.h"
 #include "battle/wildModifier.h"
 #include "battle/statsModifier.h"
+#include "time.h"
 
 #define BUTTONCOMBINATION_ENCOUNTER BUTTON_L
 #define BUTTONCOMBINATION_ENCOUNTER_VARIATION BUTTONCOMBINATION_ENCOUNTER|BUTTON_B
@@ -263,7 +264,10 @@ void handleCheats() {
 		bool updateDexNav=false;
 
 		if(cheatEnabled[entryEncounterRandomize])
+		{
 			pokemonAddress=1;
+			onlyUnseenPoke=true;
+		}
 		else if(cheatEnabled[entryEncounterItem])
 		{
 			pokemonAddress=getItemCountAddress(1,itemBag);
@@ -440,6 +444,7 @@ void gamePluginEntry() {
 	INIT_SHARED_FUNC(copyRemoteMemory, 9);
 	// wait for game starts up (5 seconds)
 	svc_sleepThread(5000000000);
+	srand(svc_getSystemTick());
 
 	if (((NS_CONFIG*)(NS_CONFIGURE_ADDR))->sharedFunc[8]) {
 		isNewNtr = 1;
