@@ -21,6 +21,8 @@ This plugin for NTR CFW adds some features to Pokemon X/Y/OR/AS.
     * Unlimited HP
     * Unlimited PP
     * 100% catch rate
+    * 1.000.000 Exp Points
+    * 1Hit Kill/Opponent 1 HP
 
 ### The Beta Cheats
 
