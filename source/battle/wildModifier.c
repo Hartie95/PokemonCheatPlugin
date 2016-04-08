@@ -14,7 +14,7 @@ void initWildModifier(int edition)
 	{
 		case PKXY:
 		{
-			PK6_LOCATION_1 = (u8*)0x63f890;
+			PK6_LOCATION_1 = (u8*)0x081FEBA0;
 			PK6_LOCATION_2 = (u8*)0x081FF744;
 			TID = (u16*)0x08C79C3C;
 			SID = (u16*)0x08C79C3E;
