@@ -385,7 +385,7 @@ void handleCheats() {
 	if(cheatEnabled[entryEncounterShiny])
 	{
 		PK6 pkm;
-		if(getCurrentPokemon(&pkm))//&& !isShiny(&pkm))
+		if(getCurrentPokemon(&pkm) && !isShiny(&pkm))
 		{
 			makeShiny(&pkm);
 			setCurrentPokemon(&pkm);
