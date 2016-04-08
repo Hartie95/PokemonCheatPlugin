@@ -29,7 +29,7 @@ def run(cmd):
 cwd = os.getcwd() 
 run("rm obj/*.o")
 run("rm bin/*.elf")
-run(CC+  " -Os -s  -g -I include -I include/libntrplg " + allFile('source/libntrplg/*.c') + allFile('source/ns/*.c') + allFile('source/*.c') + allFile('source/battle/*.c')+ allFile('source/libctru/*.c') + " -c  -march=armv6 -mlittle-endian  ");
+run(CC+  " -Os -s  -g -I include -I include/libntrplg " + allFile('source/libntrplg/*.c') + allFile('source/ns/*.c') + allFile('source/*.c') + allFile('source/battle/*.c') + allFile('source/rng/*.c') + allFile('source/libctru/*.c') + " -c  -march=armv6 -mlittle-endian  ");
 run(CC+"  -Os " + allFile('source/libntrplg/*.s') +  allFile('source/ns/*.s')  + allFile('source/*.s') + allFile('source/libctru/*.s') + " -c -s -march=armv6 -mlittle-endian ");
 
 run(LD + ' ' + LIBPATH + " -pie --print-gc-sections  -T 3ds.ld -Map=homebrew.map " + allFile("*.o") + " " + allFile("lib/*.o") + " -lc -lgcc --nostdlib"  )
