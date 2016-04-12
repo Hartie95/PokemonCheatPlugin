@@ -5,6 +5,7 @@
 #include "otherModifiers.h"
 #include "battle/wildModifier.h"
 #include "battle/statsModifier.h"
+#include "rng/rngModifier.h"
 #include "time.h"
 
 #define BUTTONCOMBINATION_ENCOUNTER BUTTON_L
@@ -29,6 +30,8 @@ int edition = 0;
 u32 curkey=0;
 enum menuEntrysEnum
 {
+	headerGeneration,
+	entryAllShiny,
 	headerEncounter,
 	entryEncounterRandomize,
 	entryEncounterItem,
@@ -64,6 +67,8 @@ enum menuEntrysEnum
 // init 
 void initCheatMenu() {
 	initMenu();
+	addMenuEntry("Pokemon Generation modifier");
+	addCheatMenuEntry("All Shiny Pokemon");
 	addMenuEntry("Wild Encounter modifier");
 	addOrCheatMenuEntry(" Random(only unseen)");
 	addOrCheatMenuEntry(" First item count");
@@ -106,6 +111,7 @@ void initPlugins()
 	initOtherModifiers(edition);
 	initWildModifier(edition);
 	initStatsModifier(edition);
+	initRNGModifier(edition);
 }
 
 int scanMenu() {
@@ -371,6 +377,11 @@ void handleCheats() {
 		getAllItems();
 	}
 	
+	if(cheatEnabled[entryAllShiny])
+	{
+		writeFullShinyTable();
+	}
+	
 	if(cheatEnabled[entryEncounterShiny])
 	{
 		PK6 pkm;
@@ -436,8 +447,6 @@ void scanCheatMenu() {
 	}
 }
 
-
-
 void gamePluginEntry() {
 	u32 ret, key;
 	INIT_SHARED_FUNC(plgGetIoBase, 8);
@@ -457,8 +466,9 @@ void gamePluginEntry() {
 	}
 	initPlugins();
 	initCheatMenu();
+	
 	while (1) {
-		svc_sleepThread(1000000);
+		svc_sleepThread(100000);
 		scanCheatMenu();
 		handleCheats();
 	}
