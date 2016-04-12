@@ -4,16 +4,17 @@ PokemonMultiCheatPlugin
 This plugin for NTR CFW adds some features to Pokemon X/Y/OR/AS.
 
 ### The Cheats
-
+*Pokemon Generation modifier(thanks to [MrNbaYoh](https://github.com/MrNbaYoh))
+    *All Shiny Pokemon
 * Wild encounter modifier
     * Species
         * Random/by item count
-        * always shiny (thanks to [MrNbaYoh](https://github.com/MrNbaYoh))
+    * Always shiny (thanks to [MrNbaYoh](https://github.com/MrNbaYoh))
     * Variation
         * Random/by item count
     * Level
         * Random/by item count
-    * Update dexnav
+    * Update Dexnav(OR/AS only)
 * Item modifier
     * Item type
     * Item count
@@ -34,9 +35,24 @@ This plugin for NTR CFW adds some features to Pokemon X/Y/OR/AS.
 ### Planned features
 
 * random trainer pokemon
-* maybe all Items cheat
+* maybe all Items cheat(key items are misssing atm)
 
 ### Usage
+
+#### The plugin
+
+First ntr cfw needst to be setted up on your 3ds, and for full support you need to install the latest update for your pokemon edition.
+
+After this is done, simply copy the plugin in one of the following folders(depending on your game):
+
+* X:  /plugin/0004000000055D00/
+* Y:  /plugin/0004000000055E00/
+* OR: /plugin/000400000011C400/
+* AS: /plugin/000400000011C500/
+
+Keep in mind, that only one ntr plugin is supported at the same time.
+
+#### Cheats
 
 * Wild encounter modifier(Item bag)
    * Species
@@ -63,18 +79,16 @@ This plugin for NTR CFW adds some features to Pokemon X/Y/OR/AS.
 4. Berry bag
 5. Key item bag
 
-#### Known Items:
+
+### Additional informations:
+
+#### Item ID list
 
 The Items IDs Are listet id the wiki, please help to fill it:
 [Item ID Wiki](https://github.com/hartmannaf/PokemonCheatPlugin/wiki/itemList)
 
-### Placement
-
-* X:  /plugin/0004000000055D00/
-* Y:  /plugin/0004000000055E00/
-* OR: /plugin/000400000011C400/
-* AS: /plugin/000400000011C500/
-
+#### Shiny Encounter
+[How the shiny encounter works](https://github.com/hartmannaf/PokemonCheatPlugin/wiki/Shiny-Generation)
 
 ### Credits
 * Encounter modifier base plugin [Pokemon Randomize](https://gbatemp.net/threads/pokemon-randomize-a-pokemon-x-y-or-as-ntr-cfw-plugin.397096/) by [KazoWAR](https://gbatemp.net/members/kazowar.133086/)

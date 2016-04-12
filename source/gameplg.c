@@ -28,58 +28,63 @@ u8 cheatEnabled[64];
 int isNewNtr = 0;
 int edition = 0;
 u32 curkey=0;
+
 enum menuEntrysEnum
 {
 	headerGeneration,
-	entryAllShiny,
+		entryAllShiny,
 	headerEncounter,
-	entryEncounterRandomize,
-	entryEncounterItem,
-	entryEncounterShiny,
+		entryEncounterRandomize,
+		entryEncounterItem,
+		entryEncounterShiny,
 	headerVariation,
-	entryVariationRandomize,
-	entryVariationItem,
+		entryVariationRandomize,
+		entryVariationItem,
 	headerWildLevel,
-	entryWildLevelRandomize,
-	entryWildLevelItem,
-	entryUpdateDexnav,
+		entryWildLevelRandomize,
+		entryWildLevelItem,
+		entryUpdateDexnav,
 	headerItemModifiers,
-	entryItemModifier,
-	entryItemCount1,
-	entryItemCount2,
-	entryItemCount3,
-	entryMedicineCount1,
-	entryMedicineCount2,
-	entryMedicineCount3,
+		entryItemModifier,
+		entryItemCount1,
+		entryItemCount2,
+		entryItemCount3,
+		entryMedicineCount1,
+		entryMedicineCount2,
+		entryMedicineCount3,
 	headerBattleModifiers,
-	entryUnlimitedHP,
-	entryUnlimitedPP,
-	entryCatchRate,
-	entryExpPoints,
-	entryOpponent1HP,
+		entryUnlimitedHP,
+		entryUnlimitedPP,
+		entryCatchRate,
+		entryExpPoints,	
+		entryOpponent1HP,
 	headerBetaCheats,
-	entryAllItems,
-	entryMaxMoney,
-	entryMaxRepel,
-	entryMaxOpower
+		entryAllItems,
+		entryMaxMoney,
+		entryMaxRepel,
+		entryMaxOpower
 };
 
-// init 
+// create the plugins menu content 
 void initCheatMenu() {
 	initMenu();
 	addMenuEntry("Pokemon Generation modifier");
 	addCheatMenuEntry("All Shiny Pokemon");
+	
 	addMenuEntry("Wild Encounter modifier");
 	addOrCheatMenuEntry(" Random(only unseen)");
 	addOrCheatMenuEntry(" First item count");
 	addCheatMenuEntry(" Shiny Pokemon");
+	
 	addMenuEntry("Wild Encounter variation modifier");
 	addOrCheatMenuEntry(" Random");
 	addOrCheatMenuEntry(" Second item count");
+	
 	addMenuEntry("Wild Encounter level modifier");
 	addOrCheatMenuEntry(" Random");
 	addOrCheatMenuEntry(" Third item count");
 	addCheatMenuEntry("Update Dexnav(ORAS only)");
+	
 	addMenuEntry("Item modifier");
 	addCheatMenuEntry(" Item modifier(using medicine count)");
 	addCheatMenuEntry(" First item  999x");
@@ -88,12 +93,14 @@ void initCheatMenu() {
 	addCheatMenuEntry(" First Medicine 999x");
 	addCheatMenuEntry(" Second Medicine 999x");
 	addCheatMenuEntry(" Third Medicine 999x");
+	
 	addMenuEntry("Battle modifier");
 	addCheatMenuEntry(" Unlimited HP");
 	addCheatMenuEntry(" Unlimited PP");
 	addCheatMenuEntry(" 100% Catch Rate");
 	addCheatMenuEntry(" 1.000.000Exp Points");
 	addCheatMenuEntry(" Opponent 1 HP");
+	
 	addMenuEntry("Untested Cheats");
 	addCheatMenuEntry(" Get all items");
 	addCheatMenuEntry(" Max Money");
@@ -103,6 +110,8 @@ void initCheatMenu() {
 	
 	updateMenu();
 }
+
+//Init the plugins Modules
 void initPlugins()
 {
 	edition=getEdition();
@@ -131,7 +140,8 @@ int detectLanguage() {
 	return 0;
 }
 // update the menu status
-void updateCheatEnableDisplay(int id) {
+void updateCheatEnableDisplay(int id) 
+{
 	gamePluginMenu.buf[gamePluginMenu.offsetInBuffer[id] + 2] = cheatEnabled[id] ? 'X' : ' ';
 }
 
@@ -142,7 +152,8 @@ void disableCheat(int id)
 }
 
 // this function will be called when the state of cheat item changed
-void onCheatItemChanged(int id, int enable) {
+void onCheatItemChanged(int id, int enable) 
+{
 	//Only one at time possible
 	//WildEncounterModifier
 	if(id==entryEncounterRandomize&&enable==true)
@@ -168,7 +179,7 @@ void onCheatItemChanged(int id, int enable) {
 		disableCheat(entryVariationItem);
 		disableCheat(entryItemCount2);
 	}
-	if(id==entryVariationItem&&enable==true)
+	else if(id==entryVariationItem&&enable==true)
 	{	
 		disableCheat(entryVariationRandomize);
 		disableCheat(entryItemCount2);
@@ -186,7 +197,7 @@ void onCheatItemChanged(int id, int enable) {
 		disableCheat(entryWildLevelItem);
 		disableCheat(entryItemCount3);
 	}
-	if(id==entryWildLevelItem&&enable==true)
+	else if(id==entryWildLevelItem&&enable==true)
 	{	
 		disableCheat(entryWildLevelRandomize);
 		disableCheat(entryItemCount3);
@@ -195,6 +206,17 @@ void onCheatItemChanged(int id, int enable) {
 	{	
 		disableCheat(entryWildLevelItem);
 		disableCheat(entryWildLevelRandomize);
+	}
+
+
+	//shiny modifier
+	if(id==entryAllShiny&&enable==true)
+	{
+		disableCheat(entryEncounterShiny);
+	}
+	else if(id==entryEncounterShiny&&enable==true)
+	{	
+		disableCheat(entryAllShiny);
 	}
 
 
@@ -227,6 +249,7 @@ void onCheatItemChanged(int id, int enable) {
 	}
 }
 
+// Helperfunction for the item count modifications
 bool checkForItemModKeyCombo(u32 position,ItemBags bag,u32 baseCombination )
 {
 	bool done=false;
@@ -256,8 +279,11 @@ bool checkForItemModKeyCombo(u32 position,ItemBags bag,u32 baseCombination )
 }
 
 // Handle cheats
-void handleCheats() {
-	curkey=getKey();
+void handleCheats() 
+{
+	curkey=getKey();	
+
+	//Wild Pokemon encounter modification cheats
 	if(cheatEnabled[entryEncounterRandomize]
 			||cheatEnabled[entryEncounterItem]
 			||cheatEnabled[entryVariationRandomize]
@@ -317,7 +343,25 @@ void handleCheats() {
 		}
 		setWildPokemonfromAddress(pokemonAddress,variationAddress, levelAddress,onlyUnseenPoke,updateDexNav);
 	}
+	
+	if(cheatEnabled[entryAllShiny])
+	{
+		writeFullShinyTable();
+	}
+	
+	if(cheatEnabled[entryEncounterShiny])
+	{
+		PK6 pkm;
+		if(getCurrentPokemon(&pkm) && !isShiny(&pkm))
+		{
+			makeShiny(&pkm);
+			setCurrentPokemon(&pkm);
+		}
+	}
 
+
+
+	//Item modification cheats
 	if(cheatEnabled[entryItemModifier])
 	{
 		bool updatedPosition=false;
@@ -346,52 +390,27 @@ void handleCheats() {
 			setItemIdAt(targetItemPosition, targetItemBag, targetItemID);
 	}
 
-	if(cheatEnabled[entryItemCount1]) {
+	if(cheatEnabled[entryItemCount1]) 
 		setItemCountAt(1,itemBag,999);
-	}
-	if(cheatEnabled[entryItemCount2]) {
+	
+	if(cheatEnabled[entryItemCount2]) 
 		setItemCountAt(2,itemBag,999);
-	}
-	if(cheatEnabled[entryItemCount3]) {
+	
+	if(cheatEnabled[entryItemCount3]) 
 		setItemCountAt(3,itemBag,999);
-	}
-	if(cheatEnabled[entryMedicineCount1]) {
+	
+	if(cheatEnabled[entryMedicineCount1]) 
 		setItemCountAt(1,medicineBag,999);
-	}
-	if(cheatEnabled[entryMedicineCount2]) {
+	
+	if(cheatEnabled[entryMedicineCount2]) 
 		setItemCountAt(2,medicineBag,999);
-	}
-	if(cheatEnabled[entryMedicineCount3]) {
+	
+	if(cheatEnabled[entryMedicineCount3]) 
 		setItemCountAt(3,medicineBag,999);
-	}
-	if(cheatEnabled[entryMaxMoney]) {
-		setMoney(0x98967F);
-	}
-	if(cheatEnabled[entryMaxRepel]) {
-		setRemainingRepel(0x00FA004D);
-	}
-	if(cheatEnabled[entryMaxOpower]) {
-		setRemainingOPower(10);
-	}
-	if(cheatEnabled[entryAllItems]) {
-		getAllItems();
-	}
 	
-	if(cheatEnabled[entryAllShiny])
-	{
-		writeFullShinyTable();
-	}
-	
-	if(cheatEnabled[entryEncounterShiny])
-	{
-		PK6 pkm;
-		if(getCurrentPokemon(&pkm) && !isShiny(&pkm))
-		{
-			makeShiny(&pkm);
-			setCurrentPokemon(&pkm);
-		}
-	}
-	
+
+
+	// Battle modifier cheats
 	if(cheatEnabled[entryUnlimitedHP])
 	{
 		setPartyMaxHP(0xFFFF);
@@ -412,8 +431,24 @@ void handleCheats() {
 	if(cheatEnabled[entryCatchRate])
 		setAutomaticCatchSuccess();
 
+
+
+	//Untested/unstable/beta cheats
+	if(cheatEnabled[entryMaxMoney])
+		setMoney(0x98967F);
+
+	if(cheatEnabled[entryMaxRepel])
+		setRemainingRepel(0x00FA004D);
+	
+	if(cheatEnabled[entryMaxOpower])
+		setRemainingOPower(10);
+	
+	if(cheatEnabled[entryAllItems])
+		getAllItems();
+
 }
 
+//Check if the cheat with id is a header
 bool isHeader(int id)
 {
 	u32 headerCount=5;
@@ -447,6 +482,7 @@ void scanCheatMenu() {
 	}
 }
 
+// Main function of the plugin
 void gamePluginEntry() {
 	u32 ret, key;
 	INIT_SHARED_FUNC(plgGetIoBase, 8);
