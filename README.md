@@ -88,7 +88,7 @@ The Items IDs Are listet id the wiki, please help to fill it:
 [Item ID Wiki](https://github.com/hartmannaf/PokemonCheatPlugin/wiki/itemList)
 
 #### Shiny Encounter
-[How the shiny encounter works](https://github.com/hartmannaf/PokemonCheatPlugin/wiki/Shiny-Generation)
+[How the shiny encounter works](https://github.com/hartmannaf/PokemonCheatPlugin/wiki/Shiny-PID-Calculation)
 
 ### Credits
 * Encounter modifier base plugin [Pokemon Randomize](https://gbatemp.net/threads/pokemon-randomize-a-pokemon-x-y-or-as-ntr-cfw-plugin.397096/) by [KazoWAR](https://gbatemp.net/members/kazowar.133086/)
