@@ -4,6 +4,8 @@ unsigned int MoneyPointerOffset=0;
 unsigned int RepelPointerOffset=0;
 unsigned int OPowerPointerOffset=0;
 
+vu32* HATCHING_STEP_COUNTER;
+
 void initOtherModifiers(int edition)
 {
 	switch (edition)
@@ -14,6 +16,8 @@ void initOtherModifiers(int edition)
 			MoneyPointerOffset = 0x08C6A6AC;
 			RepelPointerOffset = 0x08C8546C;
 			OPowerPointerOffset = 0x0;
+			
+			HATCHING_STEP_COUNTER = (vu32*)0x08C68261;
 		}
 		break;
 
@@ -23,20 +27,30 @@ void initOtherModifiers(int edition)
 			MoneyPointerOffset = 0x08C71DC0;
 			RepelPointerOffset = 0x08C8546C ;
 			OPowerPointerOffset = 0x8C83D94;
+			
+			HATCHING_STEP_COUNTER = (vu32*)0x08C6F975;
 		}
 		break;
 	}
 }
+
 void setMoney(u32 count)
 {
 	(*(vu32*)(MoneyPointerOffset))=count;
 }
+
 void setRemainingRepel(u32 count)
 {
 	(*(vu32*)(RepelPointerOffset))=count;
 }
+
 void setRemainingOPower(u32 count)
 {
 	if(OPowerPointerOffset!=0)
 		(*(vu16*)(OPowerPointerOffset))=count;
+}
+
+void setHatchingStepCounter(u16 steps)
+{
+	*HATCHING_STEP_COUNTER = steps;
 }
