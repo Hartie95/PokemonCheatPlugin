@@ -271,7 +271,7 @@ bool checkForItemModKeyCombo(u32 position,ItemBags bag,u32 baseCombination )
 	}else if(curkey==(baseCombination | BUTTONCOMBINATION_ADD_10))
 	{
 		addToItemCountAt(position,bag,10);
-		waitKeyCombinationChanged(baseCombination | BUTTONCOMBINATION_REM_1);
+		waitKeyCombinationChanged(baseCombination | BUTTONCOMBINATION_ADD_10);
 		done=true;
 	}else if(curkey==(baseCombination | BUTTONCOMBINATION_REM_10))
 	{
