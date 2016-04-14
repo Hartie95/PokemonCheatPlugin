@@ -58,6 +58,8 @@ enum menuEntrysEnum
 		entryCatchRate,
 		entryExpPoints,	
 		entryOpponent1HP,
+	headerOther,
+		entryQuickHatching,
 	headerBetaCheats,
 		entryAllItems,
 		entryMaxMoney,
@@ -100,6 +102,9 @@ void initCheatMenu() {
 	addCheatMenuEntry(" 100% Catch Rate");
 	addCheatMenuEntry(" 1.000.000Exp Points");
 	addCheatMenuEntry(" Opponent 1 HP");
+	
+	addMenuEntry("Other");
+	addCheatMenuEntry("Quick egg hatching");
 	
 	addMenuEntry("Untested Cheats");
 	addCheatMenuEntry(" Get all items");
@@ -431,7 +436,9 @@ void handleCheats()
 	if(cheatEnabled[entryCatchRate])
 		setAutomaticCatchSuccess();
 
-
+	//Other
+	if(cheatEnabled[entryQuickHatching])
+		setHatchingStepCounter(0x101);
 
 	//Untested/unstable/beta cheats
 	if(cheatEnabled[entryMaxMoney])
@@ -451,13 +458,14 @@ void handleCheats()
 //Check if the cheat with id is a header
 bool isHeader(int id)
 {
-	u32 headerCount=5;
-	int headerIDs[5]={
+	u32 headerCount=6;
+	int headerIDs[6]={
 						headerVariation,
 						headerEncounter,
 						headerBetaCheats,
 						headerItemModifiers,
-						headerWildLevel
+						headerWildLevel,
+						headerOther
 					};
 	int i;
 	for(i=0;i<headerCount;i++)
