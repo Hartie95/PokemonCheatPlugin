@@ -4,6 +4,7 @@ PokemonMultiCheatPlugin
 This plugin for NTR CFW adds some features to Pokemon X/Y/OR/AS.
 
 ### The Cheats
+
 *Pokemon Generation modifier(thanks to [MrNbaYoh](https://github.com/MrNbaYoh))
     *All Shiny Pokemon
 * Wild encounter modifier
@@ -24,13 +25,15 @@ This plugin for NTR CFW adds some features to Pokemon X/Y/OR/AS.
     * 100% catch rate
     * 1.000.000 Exp Points
     * 1Hit Kill/Opponent 1 HP
+* Other
+    * Quick egg hatching(thanks to [MrNbaYoh](https://github.com/MrNbaYoh))
+    * Unlimited opower
+    * Infinit repel
 
-### The Beta Cheats
+### The untested/unstable/beta cheats
 
 * Get all Items(x999)
-* infinit repel (ORAS only?)
 * Max money
-* Unlimited opower(ORAS only)
 
 ### Planned features
 
@@ -92,4 +95,4 @@ The Items IDs Are listet id the wiki, please help to fill it:
 
 ### Credits
 * Encounter modifier base plugin [Pokemon Randomize](https://gbatemp.net/threads/pokemon-randomize-a-pokemon-x-y-or-as-ntr-cfw-plugin.397096/) by [KazoWAR](https://gbatemp.net/members/kazowar.133086/)
-* Shiny and battle cheats where added by thanks to [MrNbaYoh](https://github.com/MrNbaYoh)
+* Multiple cheats and fixes where done by [MrNbaYoh](https://github.com/MrNbaYoh)
