@@ -61,10 +61,10 @@ enum menuEntrysEnum
 	headerOther,
 		entryQuickHatching,
 		entryMaxOpower,
+		entryMaxRepel,
 	headerBetaCheats,
 		entryAllItems,
-		entryMaxMoney,
-		entryMaxRepel
+		entryMaxMoney
 };
 
 // create the plugins menu content 
@@ -106,11 +106,11 @@ void initCheatMenu() {
 	addMenuEntry("Other");
 	addCheatMenuEntry(" Quick egg hatching");
 	addCheatMenuEntry(" Unlimited opower");
+	addCheatMenuEntry(" Unlimited repel");
 	
 	addMenuEntry("Untested Cheats");
 	addCheatMenuEntry(" Get all items");
 	addCheatMenuEntry(" Max Money");
-	addCheatMenuEntry(" Unlimited repel");
 
 	
 	updateMenu();
@@ -428,19 +428,23 @@ void handleCheats()
 	if(cheatEnabled[entryCatchRate])
 		setAutomaticCatchSuccess();
 
+
+
 	//Other
 	if(cheatEnabled[entryQuickHatching])
 		setHatchingStepCounter(0x101);
 
+	if(cheatEnabled[entryMaxOpower])
+		setRemainingOPower(10);
+
+	if(cheatEnabled[entryMaxRepel])
+		setRemainingRepel(0x02);
+
+
+
 	//Untested/unstable/beta cheats
 	if(cheatEnabled[entryMaxMoney])
 		setMoney(0x98967F);
-
-	if(cheatEnabled[entryMaxRepel])
-		setRemainingRepel(0x00FA004D);
-	
-	if(cheatEnabled[entryMaxOpower])
-		setRemainingOPower(10);
 	
 	if(cheatEnabled[entryAllItems])
 		getAllItems();

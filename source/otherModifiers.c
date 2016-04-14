@@ -15,7 +15,7 @@ void initOtherModifiers(int edition)
 		case PKXY:
 		{
 			MoneyPointerOffset  = 0x08C6A6AC;
-			RepelPointerOffset  = 0x08C8546C;
+			RepelPointerOffset  = 0x08C7D23A;
 			OPowerPointerOffset = 0x08C7BB64;
 			
 			HATCHING_STEP_COUNTER = (vu32*)0x08C68261;
@@ -26,7 +26,7 @@ void initOtherModifiers(int edition)
 		case ORAS:
 		{
 			MoneyPointerOffset  = 0x08C71DC0;
-			RepelPointerOffset  = 0x08C8546C;
+			RepelPointerOffset  = 0x08C8546E;
 			OPowerPointerOffset = 0x08C83D94;
 			
 			HATCHING_STEP_COUNTER = (vu32*)0x08C6F975;
@@ -40,9 +40,9 @@ void setMoney(u32 count)
 	(*(vu32*)(MoneyPointerOffset))=count;
 }
 
-void setRemainingRepel(u32 count)
+void setRemainingRepel(u8 count)
 {
-	(*(vu32*)(RepelPointerOffset))=count;
+	(*(vu8*)(RepelPointerOffset))=count;
 }
 
 void setRemainingOPower(u8 count)
