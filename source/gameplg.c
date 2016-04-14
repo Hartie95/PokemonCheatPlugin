@@ -60,11 +60,11 @@ enum menuEntrysEnum
 		entryOpponent1HP,
 	headerOther,
 		entryQuickHatching,
+		entryMaxOpower,
 	headerBetaCheats,
 		entryAllItems,
 		entryMaxMoney,
-		entryMaxRepel,
-		entryMaxOpower
+		entryMaxRepel
 };
 
 // create the plugins menu content 
@@ -85,7 +85,7 @@ void initCheatMenu() {
 	addMenuEntry("Wild Encounter level modifier");
 	addOrCheatMenuEntry(" Random");
 	addOrCheatMenuEntry(" Third item count");
-	addCheatMenuEntry("Update Dexnav(ORAS only)");
+	addCheatMenuEntry(" Update Dexnav(ORAS only)");
 	
 	addMenuEntry("Item modifier");
 	addCheatMenuEntry(" Item modifier(using medicine count)");
@@ -104,13 +104,13 @@ void initCheatMenu() {
 	addCheatMenuEntry(" Opponent 1 HP");
 	
 	addMenuEntry("Other");
-	addCheatMenuEntry("Quick egg hatching");
+	addCheatMenuEntry(" Quick egg hatching");
+	addCheatMenuEntry(" Unlimited opower");
 	
 	addMenuEntry("Untested Cheats");
 	addCheatMenuEntry(" Get all items");
 	addCheatMenuEntry(" Max Money");
 	addCheatMenuEntry(" Unlimited repel");
-	addCheatMenuEntry(" Unlimited opower(ORAS only)");
 
 	
 	updateMenu();
@@ -243,14 +243,6 @@ void onCheatItemChanged(int id, int enable)
 	{
 		if(edition==PKXY)
 			disableCheat(entryUpdateDexnav);
-	}
-
-
-	//no address for XY
-	if(id==entryMaxOpower)
-	{
-		if(edition==PKXY)
-			disableCheat(entryMaxOpower);
 	}
 }
 

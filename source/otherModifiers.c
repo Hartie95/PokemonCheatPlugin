@@ -6,6 +6,7 @@ unsigned int OPowerPointerOffset=0;
 
 vu32* HATCHING_STEP_COUNTER;
 
+
 void initOtherModifiers(int edition)
 {
 	switch (edition)
@@ -13,9 +14,9 @@ void initOtherModifiers(int edition)
 		//XY
 		case PKXY:
 		{
-			MoneyPointerOffset = 0x08C6A6AC;
-			RepelPointerOffset = 0x08C8546C;
-			OPowerPointerOffset = 0x0;
+			MoneyPointerOffset  = 0x08C6A6AC;
+			RepelPointerOffset  = 0x08C8546C;
+			OPowerPointerOffset = 0x08C7BB64;
 			
 			HATCHING_STEP_COUNTER = (vu32*)0x08C68261;
 		}
@@ -24,9 +25,9 @@ void initOtherModifiers(int edition)
 		//ORAS
 		case ORAS:
 		{
-			MoneyPointerOffset = 0x08C71DC0;
-			RepelPointerOffset = 0x08C8546C ;
-			OPowerPointerOffset = 0x8C83D94;
+			MoneyPointerOffset  = 0x08C71DC0;
+			RepelPointerOffset  = 0x08C8546C;
+			OPowerPointerOffset = 0x08C83D94;
 			
 			HATCHING_STEP_COUNTER = (vu32*)0x08C6F975;
 		}
@@ -44,10 +45,10 @@ void setRemainingRepel(u32 count)
 	(*(vu32*)(RepelPointerOffset))=count;
 }
 
-void setRemainingOPower(u32 count)
+void setRemainingOPower(u8 count)
 {
 	if(OPowerPointerOffset!=0)
-		(*(vu16*)(OPowerPointerOffset))=count;
+		(*(vu8*)(OPowerPointerOffset))=count;
 }
 
 void setHatchingStepCounter(u16 steps)
