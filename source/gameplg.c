@@ -62,6 +62,7 @@ enum menuEntrysEnum
 		entryQuickHatching,
 		entryMaxOpower,
 		entryMaxRepel,
+		entryPokeRadarCharge,
 	headerBetaCheats,
 		entryAllItems,
 		entryMaxMoney
@@ -107,6 +108,7 @@ void initCheatMenu() {
 	addCheatMenuEntry(" Quick egg hatching");
 	addCheatMenuEntry(" Unlimited opower");
 	addCheatMenuEntry(" Unlimited repel");
+	addCheatMenuEntry(" Unlimited Pokeradar use(YX only)");
 	
 	addMenuEntry("Untested Cheats");
 	addCheatMenuEntry(" Get all items");
@@ -241,7 +243,14 @@ void onCheatItemChanged(int id, int enable)
 	//only in oras supported
 	if(id==entryUpdateDexnav)
 	{
-		if(edition==PKXY)
+		if(edition!=ORAS)
+			disableCheat(entryUpdateDexnav);
+	}
+
+	//only in XY supported
+	if(id==entryPokeRadarCharge)
+	{
+		if(edition!=PKXY)
 			disableCheat(entryUpdateDexnav);
 	}
 }
@@ -439,6 +448,9 @@ void handleCheats()
 
 	if(cheatEnabled[entryMaxRepel])
 		setRemainingRepel(0x02);
+
+	if(cheatEnabled[entryPokeRadarCharge])
+		setPokeradarCharge(0xFF);
 
 
 
