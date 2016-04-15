@@ -2,7 +2,7 @@
 
 void initOtherModifiers(int edition);
 
-void setMoney(u32 count);
+void setMoney(s32 count);
 void setRemainingRepel(u8 count);
 void setRemainingOPower(u8 count);
 void setPokeradarCharge(u16 charge);

@@ -39,9 +39,9 @@ void initOtherModifiers(int edition)
 	}
 }
 
-void setMoney(u32 count)
+void setMoney(s32 count)
 {
-	(*(vu32*)(MoneyPointerOffset))=count;
+	(*(vs32*)(MoneyPointerOffset))=count;
 }
 
 void setRemainingRepel(u8 count)
