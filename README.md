@@ -1,7 +1,22 @@
-PokemonMultiCheatPlugin
+ポケットモンスター マルチチートプラグイン
 ==================================
 
-This plugin for NTR CFW adds some features to Pokemon X/Y/OR/AS.
+これは `NTR CFW`用のチートプラグインで、以下のソフトに対応しています。
+
+* ポケットモンスター X
+* ポケットモンスター Y
+* ポケットモンスター オメガルビー
+* ポケットモンスター アルファサファイア
+
+フォーク元: https://github.com/hartmannaf/PokemonCheatPlugin
+
+このプロジェクトの目標は以下の通りです。
+
+* 日本語主導での開発
+* 日本語ドキュメントの追加
+* ビルドの簡素化 (`Docker` 等を使って)
+* 新しいチートの追加
+* (オプション) その他の世代のチートの追加
 
 ### The Cheats
 
