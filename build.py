@@ -27,8 +27,17 @@ def run(cmd):
 	os.system(cmd)
 
 cwd = os.getcwd()
-run("rm obj/*.o")
-run("rm bin/*.elf")
+
+if os.path.exists('obj'):
+    run("rm obj/*.o")
+else:
+    run("mkdir obj") # We need this directory
+
+if os.path.exists(''):
+    run("rm bin/*.elf")
+else:
+    run("mkdir bin")
+
 run(CC+  " -Os -s  -g -I include -I include/libntrplg " + allFile('source/libntrplg/*.c') + allFile('source/ns/*.c') + allFile('source/*.c') + allFile('source/battle/*.c') + allFile('source/rng/*.c') + allFile('source/libctru/*.c') + " -c  -march=armv6 -mlittle-endian  ");
 run(CC+"  -Os " + allFile('source/libntrplg/*.s') +  allFile('source/ns/*.s')  + allFile('source/*.s') + allFile('source/libctru/*.s') + " -c -s -march=armv6 -mlittle-endian ");
 
