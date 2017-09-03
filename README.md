@@ -1,6 +1,6 @@
 # ポケットモンスター マルチチートプラグイン
 
-これは `NTR CFW`用のチートプラグインで、以下の世代に対応しています。
+これは `NTR CFW`用のチートプラグインで、以下のバージョンに対応しています。
 
 * ポケットモンスター X
 * ポケットモンスター Y
@@ -19,9 +19,6 @@
 
 ## チート一覧
 詳細については[チートの使い方ページ](https://github.com/pythonissam/PokemonCheatPlugin/wiki/%E3%83%81%E3%83%BC%E3%83%88%E3%81%AE%E4%BD%BF%E3%81%84%E6%96%B9)をご覧くだい。
-
-野生ポケモンの変更を適用するためには、
-今いるエリアとは別のエリアに移動しなければならないようです。
 
 ### 野生ポケモンの生成ルール変更 (作者: [MrNbaYoh](https://github.com/MrNbaYoh))
 
@@ -64,7 +61,10 @@
 * 全てのアイテムを入手 (999個)
 * お金 Max
 
-### クレジット
+## 導入
+参照: https://github.com/pythonissam/PokemonCheatPlugin/wiki/%E5%B0%8E%E5%85%A5
+
+## クレジット
 * Encounter modifier base plugin [Pokemon Randomize](https://gbatemp.net/threads/pokemon-randomize-a-pokemon-x-y-or-as-ntr-cfw-plugin.397096/) by [KazoWAR](https://gbatemp.net/members/kazowar.133086/)
 * 複数のチート提供, 及び改修 by [MrNbaYoh](https://github.com/MrNbaYoh)
 * その他フォーク元への貢献 by [hartmannaf](https://github.com/hartmannaf), [bulldog98](https://github.com/bulldog98)
