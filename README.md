@@ -41,12 +41,14 @@
 * ずかんナビも出現するポケモンに合わせて更新 (ORAS のみ)
 
 
-### 道具変更
-* **道具の種類と個数を変更**
-
+### 持ちもの変更
+* 道具の種類と個数を変更
 * 1番目の道具を 999個にする
 * 2番目の道具を 999個にする
 * 3番目の道具を 999個にする
+* 1番目の回復アイテムを 999個にする
+* 2番目の回復アイテムを 999個にする
+* 3番目の回復アイテムを 999個にする
 
 ### バトル中 (作者: [MrNbaYoh](https://github.com/MrNbaYoh))
 * HP 無限
@@ -60,7 +62,7 @@
 * Oパワー無制限
 * 常にむしよけスプレー
 
-## ベータ版
+### ベータ版
 * 全ての道具を入手 (999個)
 * お金 Max
 
@@ -68,31 +70,8 @@
 
 ### Usage
 
-#### The plugin
-
-First ntr cfw needst to be setted up on your 3ds, and for full support you need to install the latest update for your pokemon edition.
-
-After this is done, simply copy the plugin in one of the following folders(depending on your game):
-
-* X:  /plugin/0004000000055D00/
-* Y:  /plugin/0004000000055E00/
-* OR: /plugin/000400000011C400/
-* AS: /plugin/000400000011C500/
-
-Keep in mind, that only one ntr plugin is supported at the same time.
-
 #### Cheats
 
-* Wild encounter modifier(Item bag)
-   * Species
-       * Press L+A to set the first item count to 721
-       * Modifie the item count using:L+UP(+1)/L+DOWN(-1)L+RIGTH(+10)/L+LEFT(-10) 
- * Variation
-       * Press L+A to set the second item count to 27
-       * Modifie the item count using:L+B+UP(+1)/L+B+DOWN(-1)L+B+RIGTH(+10)/L+B+LEFT(-10) 
- * Level
-       * Press L+A to set the third item count to 100
-       * Modifie the item count using:L+X+UP(+1)/L+X+DOWN(-1)L+X+RIGTH(+10)/L+X+LEFT(-10) 
 * ItemModifier
     * Item type(uses the medicine bag items)
         * Press R+A to set the first three medicine counts item count to 1
