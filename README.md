@@ -1,5 +1,4 @@
-ポケットモンスター マルチチートプラグイン
-==================================
+# ポケットモンスター マルチチートプラグイン
 
 これは `NTR CFW`用のチートプラグインで、以下の世代に対応しています。
 
@@ -15,46 +14,57 @@
 * 日本語主導での開発
 * 日本語ドキュメントの追加
 * ビルドの簡素化 (`Docker` 等を使って)
-* 動かないチートの改修
 * 新しいチートの追加
 * (オプション) その他の世代のチートの追加
 
-### The Cheats
+## チート一覧
+野生ポケモンの変更を適用するためには、
+今いるエリアとは別のエリアに移動しなければならないようです。
 
-*Pokemon Generation modifier(thanks to [MrNbaYoh](https://github.com/MrNbaYoh))
-    *All Shiny Pokemon
-* Wild encounter modifier
-    * Species
-        * Random/by item count
-    * Always shiny (thanks to [MrNbaYoh](https://github.com/MrNbaYoh))
-    * Variation
-        * Random/by item count
-    * Level
-        * Random/by item count
-    * Update Dexnav(OR/AS only)
-* Item modifier
-    * Item type
-    * Item count
-* Battle modifier(thanks to [MrNbaYoh](https://github.com/MrNbaYoh))
-    * Unlimited HP
-    * Unlimited PP
-    * 100% catch rate
-    * 1.000.000 Exp Points
-    * 1Hit Kill/Opponent 1 HP
-* Other
-    * Quick egg hatching(thanks to [MrNbaYoh](https://github.com/MrNbaYoh))
-    * Unlimited opower
-    * Infinit repel
+### 野生ポケモンの生成ルール変更 (作者: [MrNbaYoh](https://github.com/MrNbaYoh))
 
-### The untested/unstable/beta cheats
+* 全てのポケモンを色違いにする
 
-* Get all Items(x999)
-* Max money
+### 野生ポケモンの変更
+* ポケモンの種類を ランダムに / 1番目の道具個数で 変更
+* 常に色違い (作者: [MrNbaYoh](https://github.com/MrNbaYoh))
 
-### Planned features
+### 野生ポケモンのバリエーション変更
+* ランダムに / 2番目の道具個数で 変更
 
-* random trainer pokemon
-* maybe all Items cheat(key items are misssing atm)
+フォルムやメガシンカ等の状態を指定します。例えば、1番目の道具の個数を
+382個にして、2番目の道具の個数を 2個にすると、ゲンシカイオーガになります。
+2番目の道具の個数を 1個にすると、普通のカイオーガになります。
+
+### 野生ポケモンのレベルを変更
+* ランダムに / 3番目の道具個数で 変更
+* ずかんナビも出現するポケモンに合わせて更新 (ORAS のみ)
+
+
+### 道具変更
+* **道具の種類と個数を変更**
+
+* 1番目の道具を 999個にする
+* 2番目の道具を 999個にする
+* 3番目の道具を 999個にする
+
+### バトル中 (作者: [MrNbaYoh](https://github.com/MrNbaYoh))
+* HP 無限
+* PP 無限
+* 捕獲率 100%
+* 経験値 1,000,000
+* 敵ポケモンの残り HP 1
+
+### その他
+* タマゴの孵化を早める
+* Oパワー無制限
+* 常にむしよけスプレー
+
+## ベータ版
+* 全ての道具を入手 (999個)
+* お金 Max
+
+-------------------------------------------------------------------
 
 ### Usage
 
@@ -89,6 +99,7 @@ Keep in mind, that only one ntr plugin is supported at the same time.
         * Modifie the item id(third medicine) using:R+UP(+1)/R+DOWN(-1)R+RIGTH(+10)/R+LEFT(-10)
         * Modifie the item bag(second medicine) using:R+B+UP(+1)/R+B+DOWN(-1)R+B+RIGTH(+10)/R+B+LEFT(-10)  
         * Modifie the item position(first medicine):R+X+UP(+1)/R+X+DOWN(-1)R+X+RIGTH(+10)/R+X+LEFT(-10)
+
 
 #### Supported itemBags
 
