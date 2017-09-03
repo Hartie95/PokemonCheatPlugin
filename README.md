@@ -56,7 +56,7 @@
 * 敵ポケモンの残り HP 1
 
 ### その他
-* タマゴの孵化を早める
+* タマゴの孵化を早める (作者: [MrNbaYoh](https://github.com/MrNbaYoh))
 * Oパワー無制限
 * 常にむしよけスプレー
 
@@ -64,18 +64,7 @@
 * 全てのアイテムを入手 (999個)
 * お金 Max
 
--------------------------------------------------------------------
-
-### Additional informations:
-
-#### Item ID list
-
-The Items IDs Are listet id the wiki, please help to fill it:
-[Item ID Wiki](https://github.com/hartmannaf/PokemonCheatPlugin/wiki/itemList)
-
-#### Shiny Encounter
-[How the shiny encounter works](https://github.com/hartmannaf/PokemonCheatPlugin/wiki/Shiny-PID-Calculation)
-
-### Credits
+### クレジット
 * Encounter modifier base plugin [Pokemon Randomize](https://gbatemp.net/threads/pokemon-randomize-a-pokemon-x-y-or-as-ntr-cfw-plugin.397096/) by [KazoWAR](https://gbatemp.net/members/kazowar.133086/)
-* Multiple cheats and fixes where done by [MrNbaYoh](https://github.com/MrNbaYoh)
+* 複数のチート提供, 及び改修 by [MrNbaYoh](https://github.com/MrNbaYoh)
+* その他フォーク元への貢献 by [hartmannaf](https://github.com/hartmannaf), [bulldog98](https://github.com/bulldog98)
