@@ -27,14 +27,10 @@
 
 ### 野生ポケモンの変更
 * ポケモンの種類を ランダムに / 1番目の道具個数で 変更
-* 常に色違い (作者: [MrNbaYoh](https://github.com/MrNbaYoh))
+* 常に色違い (1匹だけ?) (作者: [MrNbaYoh](https://github.com/MrNbaYoh))
 
 ### 野生ポケモンのバリエーション変更
 * ランダムに / 2番目の道具個数で 変更
-
-フォルムやメガシンカ等の状態を指定します。例えば、1番目の道具の個数を
-382個にして、2番目の道具の個数を 2個にすると、ゲンシカイオーガになります。
-2番目の道具の個数を 1個にすると、普通のカイオーガになります。
 
 ### 野生ポケモンのレベルを変更
 * ランダムに / 3番目の道具個数で 変更
@@ -67,27 +63,6 @@
 * お金 Max
 
 -------------------------------------------------------------------
-
-### Usage
-
-#### Cheats
-
-* ItemModifier
-    * Item type(uses the medicine bag items)
-        * Press R+A to set the first three medicine counts item count to 1
-        * Modifie the item id(third medicine) using:R+UP(+1)/R+DOWN(-1)R+RIGTH(+10)/R+LEFT(-10)
-        * Modifie the item bag(second medicine) using:R+B+UP(+1)/R+B+DOWN(-1)R+B+RIGTH(+10)/R+B+LEFT(-10)  
-        * Modifie the item position(first medicine):R+X+UP(+1)/R+X+DOWN(-1)R+X+RIGTH(+10)/R+X+LEFT(-10)
-
-
-#### Supported itemBags
-
-1. Item bag
-2. Medicine bag
-3. TM/HM bag
-4. Berry bag
-5. Key item bag
-
 
 ### Additional informations:
 
