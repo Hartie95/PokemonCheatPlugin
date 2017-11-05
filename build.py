@@ -33,7 +33,7 @@ if os.path.exists('obj'):
 else:
     run("mkdir obj") # We need this directory
 
-if os.path.exists(''):
+if os.path.exists('bin'):
     run("rm bin/*.elf")
 else:
     run("mkdir bin")
