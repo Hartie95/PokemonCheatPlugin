@@ -64,6 +64,32 @@
 ## 導入
 参照: https://github.com/pythonissam/PokemonCheatPlugin/wiki/%E5%B0%8E%E5%85%A5
 
+## 開発
+このプロジェクトでは、`Docker` と `Docker Compose` を開発に使っています。まず最初に、
+これらのツールをインストールしてください。
+
+次に、以下のコマンドをプロジェクト直下で実行してください:
+
+```bash
+$ mkdir pokeplg
+$ docker-compose up -d
+```
+
+`pokeplg` の中を見てみましょう。`cheat.plg` が生成されているはずです。また、`share` の中の変更は即座に反映され、
+自動でリビルドされます。
+
+ログを見るためには以下のコマンドを実行してください:
+
+```bash
+$ docker-compose logs
+```
+
+開発を終了する際には以下のコマンドを実行してください:
+
+```bash
+$ docker-compose down
+```
+
 ## クレジット
 * Encounter modifier base plugin [Pokemon Randomize](https://gbatemp.net/threads/pokemon-randomize-a-pokemon-x-y-or-as-ntr-cfw-plugin.397096/) by [KazoWAR](https://gbatemp.net/members/kazowar.133086/)
 * 複数のチート提供, 及び改修 by [MrNbaYoh](https://github.com/MrNbaYoh)
