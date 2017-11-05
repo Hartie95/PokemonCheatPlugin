@@ -8,4 +8,5 @@ services:
     working_dir: /root/cheat/share/
     # Use this for debugging
     # command: /bin/bash -c "while true; do sleep 1000; done"
-    command: /bin/bash -c "while inotifywait -e modify,moved_to,moved_from,create,delete -r .; do python3 build.py; done"
+    # sleep 1 を入れないとファイルが実際に変更される前にビルドが走ってしまう
+    command: /bin/bash -c "python3 build.py && while inotifywait -e modify,moved_to,moved_from,create,delete -r .; do sleep 1 && python3 build.py; done"
