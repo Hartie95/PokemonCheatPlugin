@@ -3,7 +3,9 @@ services:
   poke-cheat:
     build: .
     volumes:
-      - ./pokeplg/:/root/cheat/pokeplg/
-    working_dir: /root/cheat/
+      - ./share/:/root/cheat/share/
+      - ./pokeplg/:/root/cheat/pokeplg/ # ここにチートが生成される
+    working_dir: /root/cheat/share/
+    # Use this for debugging
     # command: /bin/bash -c "while true; do sleep 1000; done"
-    command: python3 build.py
+    command: /bin/bash -c "while inotifywait -e modify,moved_to,moved_from,create,delete -r .; do python3 build.py; done"
