@@ -1,98 +1,96 @@
-PokemonMultiCheatPlugin
-==================================
+# ポケットモンスター マルチチートプラグイン
 
-This plugin for NTR CFW adds some features to Pokemon X/Y/OR/AS.
+これは `NTR CFW`用のチートプラグインで、以下のバージョンに対応しています。
 
-### The Cheats
+* ポケットモンスター X
+* ポケットモンスター Y
+* ポケットモンスター オメガルビー
+* ポケットモンスター アルファサファイア
 
-*Pokemon Generation modifier(thanks to [MrNbaYoh](https://github.com/MrNbaYoh))
-    *All Shiny Pokemon
-* Wild encounter modifier
-    * Species
-        * Random/by item count
-    * Always shiny (thanks to [MrNbaYoh](https://github.com/MrNbaYoh))
-    * Variation
-        * Random/by item count
-    * Level
-        * Random/by item count
-    * Update Dexnav(OR/AS only)
-* Item modifier
-    * Item type
-    * Item count
-* Battle modifier(thanks to [MrNbaYoh](https://github.com/MrNbaYoh))
-    * Unlimited HP
-    * Unlimited PP
-    * 100% catch rate
-    * 1.000.000 Exp Points
-    * 1Hit Kill/Opponent 1 HP
-* Other
-    * Quick egg hatching(thanks to [MrNbaYoh](https://github.com/MrNbaYoh))
-    * Unlimited opower
-    * Infinit repel
+フォーク元: https://github.com/hartmannaf/PokemonCheatPlugin
 
-### The untested/unstable/beta cheats
+このプロジェクトの目標は以下の通りです。
 
-* Get all Items(x999)
-* Max money
+* 日本語主導での開発
+* 日本語ドキュメントの追加
+* ビルドの簡素化 (`Docker` 等を使って)
+* 新しいチートの追加
+* (オプション) その他の世代のチートの追加
 
-### Planned features
+## チート一覧
+詳細については[チートの使い方ページ](https://github.com/pythonissam/PokemonCheatPlugin/wiki/%E3%83%81%E3%83%BC%E3%83%88%E3%81%AE%E4%BD%BF%E3%81%84%E6%96%B9)をご覧くだい。
 
-* random trainer pokemon
-* maybe all Items cheat(key items are misssing atm)
+### 野生ポケモンの生成ルール変更 (作者: [MrNbaYoh](https://github.com/MrNbaYoh))
 
-### Usage
+* 全てのポケモンを色違いにする
 
-#### The plugin
+### 野生ポケモンの変更
+* ポケモンの種類を ランダムに / 1番目の道具個数で 変更
+* 常に色違い (1匹だけ?) (作者: [MrNbaYoh](https://github.com/MrNbaYoh))
 
-First ntr cfw needst to be setted up on your 3ds, and for full support you need to install the latest update for your pokemon edition.
+### 野生ポケモンのバリエーション変更
+* ランダムに / 2番目の道具個数で 変更
 
-After this is done, simply copy the plugin in one of the following folders(depending on your game):
-
-* X:  /plugin/0004000000055D00/
-* Y:  /plugin/0004000000055E00/
-* OR: /plugin/000400000011C400/
-* AS: /plugin/000400000011C500/
-
-Keep in mind, that only one ntr plugin is supported at the same time.
-
-#### Cheats
-
-* Wild encounter modifier(Item bag)
-   * Species
-       * Press L+A to set the first item count to 721
-       * Modifie the item count using:L+UP(+1)/L+DOWN(-1)L+RIGTH(+10)/L+LEFT(-10) 
- * Variation
-       * Press L+A to set the second item count to 27
-       * Modifie the item count using:L+B+UP(+1)/L+B+DOWN(-1)L+B+RIGTH(+10)/L+B+LEFT(-10) 
- * Level
-       * Press L+A to set the third item count to 100
-       * Modifie the item count using:L+X+UP(+1)/L+X+DOWN(-1)L+X+RIGTH(+10)/L+X+LEFT(-10) 
-* ItemModifier
-    * Item type(uses the medicine bag items)
-        * Press R+A to set the first three medicine counts item count to 1
-        * Modifie the item id(third medicine) using:R+UP(+1)/R+DOWN(-1)R+RIGTH(+10)/R+LEFT(-10)
-        * Modifie the item bag(second medicine) using:R+B+UP(+1)/R+B+DOWN(-1)R+B+RIGTH(+10)/R+B+LEFT(-10)  
-        * Modifie the item position(first medicine):R+X+UP(+1)/R+X+DOWN(-1)R+X+RIGTH(+10)/R+X+LEFT(-10)
-
-#### Supported itemBags
-
-1. Item bag
-2. Medicine bag
-3. TM/HM bag
-4. Berry bag
-5. Key item bag
+### 野生ポケモンのレベルを変更
+* ランダムに / 3番目の道具個数で 変更
+* ずかんナビも出現するポケモンに合わせて更新 (ORAS のみ)
 
 
-### Additional informations:
+### アイテム変更
+* アイテムの種類と個数を変更
+* 1番目の道具を 999個にする
+* 2番目の道具を 999個にする
+* 3番目の道具を 999個にする
+* 1番目の回復アイテムを 999個にする
+* 2番目の回復アイテムを 999個にする
+* 3番目の回復アイテムを 999個にする
 
-#### Item ID list
+### バトル中 (作者: [MrNbaYoh](https://github.com/MrNbaYoh))
+* HP 無限
+* PP 無限
+* 捕獲率 100%
+* 経験値 1,000,000
+* 敵ポケモンの残り HP 1
 
-The Items IDs Are listet id the wiki, please help to fill it:
-[Item ID Wiki](https://github.com/hartmannaf/PokemonCheatPlugin/wiki/itemList)
+### その他
+* タマゴの孵化を早める (作者: [MrNbaYoh](https://github.com/MrNbaYoh))
+* Oパワー無制限
+* 常にむしよけスプレー
 
-#### Shiny Encounter
-[How the shiny encounter works](https://github.com/hartmannaf/PokemonCheatPlugin/wiki/Shiny-PID-Calculation)
+### ベータ版
+* 全てのアイテムを入手 (999個)
+* お金 Max
 
-### Credits
+## 導入
+参照: https://github.com/pythonissam/PokemonCheatPlugin/wiki/%E5%B0%8E%E5%85%A5
+
+## 開発
+このプロジェクトでは、`Docker` と `Docker Compose` を開発に使っています。まず最初に、
+これらのツールをインストールしてください。
+
+次に、以下のコマンドをプロジェクト直下で実行してください:
+
+```bash
+$ mkdir pokeplg
+$ docker-compose up -d
+```
+
+`pokeplg` の中を見てみましょう。`cheat.plg` が生成されているはずです。また、`share` の中の変更は即座に反映され、
+自動でリビルドされます。
+
+ログを見るためには以下のコマンドを実行してください:
+
+```bash
+$ docker-compose logs
+```
+
+開発を終了する際には以下のコマンドを実行してください:
+
+```bash
+$ docker-compose down
+```
+
+## クレジット
 * Encounter modifier base plugin [Pokemon Randomize](https://gbatemp.net/threads/pokemon-randomize-a-pokemon-x-y-or-as-ntr-cfw-plugin.397096/) by [KazoWAR](https://gbatemp.net/members/kazowar.133086/)
-* Multiple cheats and fixes where done by [MrNbaYoh](https://github.com/MrNbaYoh)
+* 複数のチート提供, 及び改修 by [MrNbaYoh](https://github.com/MrNbaYoh)
+* その他フォーク元への貢献 by [hartmannaf](https://github.com/hartmannaf), [bulldog98](https://github.com/bulldog98)
