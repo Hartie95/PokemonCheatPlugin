@@ -1,0 +1,9 @@
+version: '3'
+services:
+  poke-cheat:
+    build: .
+    volumes:
+      - ./pokeplg/:/root/cheat/pokeplg/
+    working_dir: /root/cheat/
+    # command: /bin/bash -c "while true; do sleep 1000; done"
+    command: python3 build.py

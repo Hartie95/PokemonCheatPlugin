@@ -5,7 +5,7 @@ import ftplib
 import glob
 
 # the path plugin was copied to
-COPYTOPATH = 'cheat.plg'
+COPYTOPATH = 'pokeplg/cheat.plg'
 
 CC = "arm-none-eabi-gcc"
 CP = "arm-none-eabi-g++"
