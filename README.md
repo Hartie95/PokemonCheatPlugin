@@ -60,19 +60,19 @@ Keep in mind, that only one ntr plugin is supported at the same time.
 * Wild encounter modifier(Item bag)
    * Species
        * Press L+A to set the first item count to 721
-       * Modifie the item count using:L+UP(+1)/L+DOWN(-1)L+RIGTH(+10)/L+LEFT(-10) 
+       * Modifie the item count using:L+UP(+1)/L+DOWN(-1)L+RIGHT(+10)/L+LEFT(-10) 
  * Variation
        * Press L+A to set the second item count to 27
-       * Modifie the item count using:L+B+UP(+1)/L+B+DOWN(-1)L+B+RIGTH(+10)/L+B+LEFT(-10) 
+       * Modifie the item count using:L+B+UP(+1)/L+B+DOWN(-1)L+B+RIGHT(+10)/L+B+LEFT(-10) 
  * Level
        * Press L+A to set the third item count to 100
-       * Modifie the item count using:L+X+UP(+1)/L+X+DOWN(-1)L+X+RIGTH(+10)/L+X+LEFT(-10) 
+       * Modifie the item count using:L+X+UP(+1)/L+X+DOWN(-1)L+X+RIGHT(+10)/L+X+LEFT(-10) 
 * ItemModifier
     * Item type(uses the medicine bag items)
         * Press R+A to set the first three medicine counts item count to 1
-        * Modifie the item id(third medicine) using:R+UP(+1)/R+DOWN(-1)R+RIGTH(+10)/R+LEFT(-10)
-        * Modifie the item bag(second medicine) using:R+B+UP(+1)/R+B+DOWN(-1)R+B+RIGTH(+10)/R+B+LEFT(-10)  
-        * Modifie the item position(first medicine):R+X+UP(+1)/R+X+DOWN(-1)R+X+RIGTH(+10)/R+X+LEFT(-10)
+        * Modifie the item id(third medicine) using:R+UP(+1)/R+DOWN(-1)R+RIGHT(+10)/R+LEFT(-10)
+        * Modifie the item bag(second medicine) using:R+B+UP(+1)/R+B+DOWN(-1)R+B+RIGHT(+10)/R+B+LEFT(-10)  
+        * Modifie the item position(first medicine):R+X+UP(+1)/R+X+DOWN(-1)R+X+RIGHT(+10)/R+X+LEFT(-10)
 
 #### Supported itemBags
 
