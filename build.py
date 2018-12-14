@@ -7,12 +7,12 @@ import glob
 # the path plugin was copied to
 COPYTOPATH = 'cheat.plg'
 
-CC = "arm-none-eabi-gcc"
-CP = "arm-none-eabi-g++"
-OC = "arm-none-eabi-objcopy"
-LD = "arm-none-eabi-ld"
-CTRULIB = '../libctru'
 DEVKITARM = os.environ['DEVKITARM']
+CC = DEVKITARM + "/bin/arm-none-eabi-gcc"
+CP = DEVKITARM + "/bin/arm-none-eabi-g++"
+OC = DEVKITARM + "/bin/arm-none-eabi-objcopy"
+LD = DEVKITARM + "/bin/arm-none-eabi-ld"
+CTRULIB = '../libctru'
 LIBPATH = '-L ' + DEVKITARM + '/lib/gcc/arm-none-eabi/5.3.0/' + ' -L ' + DEVKITARM + '/arm-none-eabi/lib/ -L obj'
 
 
